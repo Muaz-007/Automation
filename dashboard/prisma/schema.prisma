@@ -1,0 +1,219 @@
+// WhatsappAutomate — multi-tenant Postgres schema (Prisma)
+// Mirrors db/schema.sql for use with Supabase.
+
+generator client {
+  provider        = "prisma-client-js"
+  previewFeatures = ["postgresqlExtensions"]
+}
+
+datasource db {
+  provider   = "postgresql"
+  url        = env("DATABASE_URL")
+  directUrl  = env("DIRECT_URL")
+  extensions = [pgcrypto, vector]
+  schemas    = ["public"]
+}
+
+enum Industry {
+  real_estate
+  ecommerce
+  healthcare
+
+  @@schema("public")
+}
+
+enum Plan {
+  starter
+  growth
+  pro
+  enterprise
+
+  @@schema("public")
+}
+
+enum AiTone {
+  formal
+  friendly
+  casual
+
+  @@schema("public")
+}
+
+enum Language {
+  english
+  urdu
+  roman_urdu
+  mixed
+
+  @@schema("public")
+}
+
+enum LeadStatus {
+  new
+  qualifying
+  hot
+  warm
+  cold
+  won
+  lost
+
+  @@schema("public")
+}
+
+enum Role {
+  owner
+  agent
+  viewer
+
+  @@schema("public")
+}
+
+enum MessageRole {
+  user
+  assistant
+  system
+
+  @@schema("public")
+}
+
+model Tenant {
+  id              String   @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  business_name   String
+  industry        Industry
+  plan            Plan     @default(starter)
+  phone_number_id String?  @unique
+  phone_number    String?
+  whatsapp_token  String?
+  ai_persona_name String?  @default("Assistant")
+  ai_tone         AiTone   @default(friendly)
+  language        Language @default(mixed)
+  system_prompt   String?
+  created_at      DateTime @default(now()) @db.Timestamptz
+  updated_at      DateTime @default(now()) @updatedAt @db.Timestamptz
+
+  users         TenantUser[]
+  configs       TenantConfig[]
+  documents     Document[]
+  customers     Customer[]
+  leads         Lead[]
+  conversations Conversation[]
+
+  @@schema("public")
+  @@map("tenants")
+}
+
+model TenantUser {
+  id           String   @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  tenant_id    String   @db.Uuid
+  auth_user_id String?  @unique @db.Uuid
+  email        String
+  full_name    String?
+  role         Role     @default(owner)
+  created_at   DateTime @default(now()) @db.Timestamptz
+
+  tenant         Tenant @relation(fields: [tenant_id], references: [id], onDelete: Cascade)
+  assigned_leads Lead[] @relation("AssignedLeads")
+
+  @@index([tenant_id])
+  @@schema("public")
+  @@map("tenant_users")
+}
+
+model TenantConfig {
+  tenant_id String @db.Uuid
+  key       String
+  value     Json
+
+  tenant Tenant @relation(fields: [tenant_id], references: [id], onDelete: Cascade)
+
+  @@id([tenant_id, key])
+  @@schema("public")
+  @@map("tenant_config")
+}
+
+model Document {
+  id         String                       @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  tenant_id  String                       @db.Uuid
+  source     String?
+  content    String
+  embedding  Unsupported("vector(1536)")?
+  metadata   Json                         @default("{}")
+  created_at DateTime                     @default(now()) @db.Timestamptz
+
+  tenant Tenant @relation(fields: [tenant_id], references: [id], onDelete: Cascade)
+
+  @@index([tenant_id])
+  @@schema("public")
+  @@map("documents")
+}
+
+model Customer {
+  id         String   @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  tenant_id  String   @db.Uuid
+  phone      String
+  name       String?
+  city       String?
+  metadata   Json     @default("{}")
+  created_at DateTime @default(now()) @db.Timestamptz
+
+  tenant        Tenant         @relation(fields: [tenant_id], references: [id], onDelete: Cascade)
+  leads         Lead[]
+  conversations Conversation[]
+
+  @@unique([tenant_id, phone])
+  @@index([tenant_id])
+  @@schema("public")
+  @@map("customers")
+}
+
+model Lead {
+  id              String     @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  tenant_id       String     @db.Uuid
+  customer_id     String     @db.Uuid
+  status          LeadStatus @default(new)
+  hot_score       Int        @default(0)
+  source          String?
+  extracted_data  Json       @default("{}")
+  assigned_to     String?    @db.Uuid
+  last_message_at DateTime?  @db.Timestamptz
+  created_at      DateTime   @default(now()) @db.Timestamptz
+  updated_at      DateTime   @default(now()) @updatedAt @db.Timestamptz
+
+  tenant   Tenant      @relation(fields: [tenant_id], references: [id], onDelete: Cascade)
+  customer Customer    @relation(fields: [customer_id], references: [id], onDelete: Cascade)
+  assignee TenantUser? @relation("AssignedLeads", fields: [assigned_to], references: [id], onDelete: SetNull)
+
+  @@index([tenant_id, status])
+  @@index([tenant_id, last_message_at(sort: Desc)])
+  @@schema("public")
+  @@map("leads")
+}
+
+model Conversation {
+  id          String      @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  tenant_id   String      @db.Uuid
+  customer_id String      @db.Uuid
+  role        MessageRole
+  message     String
+  metadata    Json        @default("{}")
+  created_at  DateTime    @default(now()) @db.Timestamptz
+
+  tenant   Tenant   @relation(fields: [tenant_id], references: [id], onDelete: Cascade)
+  customer Customer @relation(fields: [customer_id], references: [id], onDelete: Cascade)
+
+  @@index([tenant_id, customer_id, created_at])
+  @@schema("public")
+  @@map("conversations")
+}
+
+model IndustryTemplate {
+  id              String   @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  industry        Industry @unique
+  display_name    String
+  system_prompt   String
+  required_fields Json     @default("[]")
+  created_at      DateTime @default(now()) @db.Timestamptz
+
+  @@schema("public")
+  @@map("industry_templates")
+}
