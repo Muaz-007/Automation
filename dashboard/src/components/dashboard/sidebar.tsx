@@ -17,13 +17,32 @@ import { signOut } from "@/app/actions/auth";
 import { useMobileNav } from "@/components/dashboard/mobile-nav";
 import { LogoMark } from "@/components/logo";
 
-const nav = [
-  { href: "/dashboard", label: "Overview", icon: LayoutDashboard },
-  { href: "/leads", label: "Leads", icon: Users },
-  { href: "/conversations", label: "Conversations", icon: MessagesSquare },
-  { href: "/playground", label: "Playground", icon: Sparkles },
-  { href: "/inventory", label: "Inventory", icon: Database },
-  { href: "/settings", label: "Settings", icon: Settings },
+type NavItem = {
+  href: string;
+  label: string;
+  icon: typeof LayoutDashboard;
+};
+
+const navSections: { heading: string; items: NavItem[] }[] = [
+  {
+    heading: "Workspace",
+    items: [
+      { href: "/dashboard", label: "Overview", icon: LayoutDashboard },
+      { href: "/leads", label: "Leads", icon: Users },
+      { href: "/conversations", label: "Conversations", icon: MessagesSquare },
+    ],
+  },
+  {
+    heading: "Tools",
+    items: [
+      { href: "/playground", label: "Playground", icon: Sparkles },
+      { href: "/inventory", label: "Inventory", icon: Database },
+    ],
+  },
+  {
+    heading: "Account",
+    items: [{ href: "/settings", label: "Settings", icon: Settings }],
+  },
 ];
 
 function SidebarBody({
@@ -45,7 +64,8 @@ function SidebarBody({
         <LogoMark size="sm" />
         <div className="flex flex-col min-w-0 flex-1">
           <span className="font-display text-sm font-semibold leading-none">
-            Whatsapp<span className="text-primary">Automate</span>
+            Whats<span className="text-primary">App</span>
+            <span className="ml-1">Automate</span>
           </span>
           <span className="truncate text-xs text-muted-foreground mt-1">
             {businessName}
@@ -62,31 +82,45 @@ function SidebarBody({
         )}
       </div>
 
-      <nav className="flex-1 space-y-1 overflow-y-auto p-3">
-        {nav.map((item) => {
-          const active =
-            pathname === item.href || pathname.startsWith(`${item.href}/`);
-          return (
-            <Link
-              key={item.href}
-              href={item.href}
-              className={cn(
-                "group flex items-center gap-3 rounded-md px-3 py-2 text-sm font-medium transition-all",
-                active
-                  ? "bg-accent text-accent-foreground"
-                  : "text-muted-foreground hover:bg-muted hover:text-foreground",
-              )}
-            >
-              <item.icon
-                className={cn(
-                  "h-4 w-4 transition-transform group-hover:scale-110",
-                  active && "text-primary",
-                )}
-              />
-              {item.label}
-            </Link>
-          );
-        })}
+      <nav className="flex-1 space-y-5 overflow-y-auto px-3 py-4">
+        {navSections.map((section) => (
+          <div key={section.heading} className="space-y-0.5">
+            <div className="px-3 pb-1.5 text-[10px] font-semibold uppercase tracking-wider text-muted-foreground/70">
+              {section.heading}
+            </div>
+            {section.items.map((item) => {
+              const active =
+                pathname === item.href || pathname.startsWith(`${item.href}/`);
+              return (
+                <Link
+                  key={item.href}
+                  href={item.href}
+                  className={cn(
+                    "group relative flex items-center gap-3 rounded-md px-3 py-2 text-sm font-medium transition-colors",
+                    active
+                      ? "bg-accent/60 text-foreground"
+                      : "text-muted-foreground hover:bg-muted/70 hover:text-foreground",
+                  )}
+                >
+                  {/* Active indicator bar on the left */}
+                  {active && (
+                    <span
+                      aria-hidden
+                      className="absolute left-0 top-1.5 bottom-1.5 w-0.5 rounded-r bg-primary"
+                    />
+                  )}
+                  <item.icon
+                    className={cn(
+                      "h-4 w-4 shrink-0 transition-colors",
+                      active ? "text-primary" : "group-hover:text-foreground",
+                    )}
+                  />
+                  {item.label}
+                </Link>
+              );
+            })}
+          </div>
+        ))}
       </nav>
 
       <div className="border-t border-border p-3">

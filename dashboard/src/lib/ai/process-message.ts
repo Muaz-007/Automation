@@ -90,7 +90,23 @@ export async function processInboundMessage(
     },
   });
 
-  // 3. Build the prompt + load history
+  // 3. Fetch inventory items so the AI can answer from real data
+  const inventoryItems = await prisma.inventoryItem.findMany({
+    where: { tenant_id: tenant.id },
+    orderBy: { created_at: "desc" },
+    take: 80,
+    select: {
+      name: true,
+      external_id: true,
+      category: true,
+      price_pkr: true,
+      status: true,
+      description: true,
+      data: true,
+    },
+  });
+
+  // 4. Build the prompt + load history
   const systemPrompt = buildSystemPrompt({
     businessName: tenant.business_name,
     industry: tenant.industry,
@@ -101,6 +117,13 @@ export async function processInboundMessage(
     customSystemPrompt: tenant.system_prompt,
     customerName: customer.name,
     customerCity: customer.city,
+    inventory: inventoryItems.map((i) => ({
+      ...i,
+      data:
+        i.data && typeof i.data === "object" && !Array.isArray(i.data)
+          ? (i.data as Record<string, unknown>)
+          : null,
+    })),
   });
 
   const recent = await prisma.conversation.findMany({

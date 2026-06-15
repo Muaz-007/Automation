@@ -1,0 +1,21 @@
+id,title,type,purpose,bedrooms,bathrooms,area_size,area_location,city,price_pkr,status,description
+RE-001,3 Bed House in DHA Phase 6,house,buy,3,4,10 marla,DHA Phase 6,Lahore,32500000,available,Modern double-storey house with car porch and lawn. Park-facing.
+RE-002,5 Bed House in DHA Phase 8,house,buy,5,6,1 kanal,DHA Phase 8,Lahore,72500000,available,Brand new luxury house with basement and rooftop terrace.
+RE-003,2 Bed Apartment in Bahria Town,apartment,rent,2,2,1200 sqft,Bahria Town Sector C,Lahore,75000,available,Furnished apartment with parking and 24/7 security. Available immediately.
+RE-004,Commercial Plot in Gulberg,commercial,buy,0,0,4 marla,Gulberg Main Boulevard,Lahore,48000000,available,Prime commercial plot on Main Boulevard. Suitable for office or showroom.
+RE-005,1 Kanal Plot in Wapda Town,plot,buy,0,0,1 kanal,Wapda Town Phase 2,Lahore,28500000,available,Corner plot in an established neighborhood. All utilities available.
+RE-006,4 Bed House in Model Town,house,buy,4,5,14 marla,Model Town Block H,Lahore,55000000,under_offer,Spacious bungalow with servant quarters and gas connection.
+RE-007,Studio Apartment in DHA Y-Block,apartment,rent,1,1,650 sqft,DHA Phase 5 Y Block,Lahore,55000,available,Fully furnished studio. Walking distance to Y-Block Commercial.
+RE-008,7 Marla House in Johar Town,house,buy,3,3,7 marla,Johar Town Phase 1,Lahore,21500000,available,Renovated 3-bed house in a family-friendly location.
+RE-009,3 Bed Apartment in DHA Phase 8,apartment,buy,3,3,1850 sqft,DHA Phase 8 - Z Block,Lahore,42000000,available,High-rise apartment with gym, pool, and concierge access.
+RE-010,Penthouse in Goldcrest Mall,apartment,buy,4,5,3500 sqft,DHA Phase 4,Lahore,135000000,available,Top-floor penthouse with private rooftop and panoramic city views.
+RE-011,2 Kanal Farmhouse in Bedian,house,buy,5,6,2 kanal,Bedian Road,Lahore,98000000,available,Beautifully landscaped farmhouse perfect for weekend retreats and events.
+RE-012,1 Bed Apartment in Eden Heights,apartment,rent,1,1,900 sqft,Jail Road,Lahore,42000,available,Affordable bachelor apartment with lift access.
+RE-013,5 Marla House in DHA Phase 9,house,buy,3,3,5 marla,DHA Phase 9 Town,Lahore,18500000,sold,Compact family home — sold to a returning buyer.
+RE-014,Shop in Liberty Market,commercial,rent,0,1,400 sqft,Liberty Market,Lahore,180000,available,Ground-floor shop in busy commercial area. Suitable for retail or food.
+RE-015,10 Marla House in Bahria Orchard,house,buy,4,5,10 marla,Bahria Orchard Phase 1,Lahore,42000000,available,Newly built modern home with smart-home wiring and solar setup.
+RE-016,3 Bed House in Wapda Town,house,rent,3,3,10 marla,Wapda Town Phase 1,Lahore,95000,available,Well-maintained house with backyard and dedicated study room.
+RE-017,1 Kanal Corner Plot in Lake City,plot,buy,0,0,1 kanal,Lake City Sector M-3,Lahore,31000000,available,Possession-ready corner plot with golf-course views.
+RE-018,Office Space in Arfa Tower,commercial,rent,0,2,1500 sqft,Ferozepur Road,Lahore,225000,available,Premium Grade-A office space with reception and 4 cabins.
+RE-019,4 Bed House in Askari 10,house,buy,4,4,12 marla,Askari 10 Block C,Lahore,49500000,available,Family home inside gated military housing with park access.
+RE-020,Plot File in DHA Phase 13,plot,buy,0,0,1 kanal,DHA Phase 13,Lahore,16500000,available,Future-development plot file. Good investment for 2–3 year horizon.

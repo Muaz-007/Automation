@@ -13,6 +13,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { StatusBadge } from "@/components/dashboard/status-badge";
+import { ChatThread } from "@/components/dashboard/chat-thread";
 import { prisma } from "@/lib/prisma";
 import { requireTenant } from "@/lib/dal";
 import { formatRelativeTime, initials } from "@/lib/utils";
@@ -156,56 +157,27 @@ export default async function LeadDetailPage({
             </Card>
           </div>
 
-          <Card className="lg:col-span-2">
-            <CardHeader className="flex flex-row items-center justify-between space-y-0">
-              <CardTitle>WhatsApp conversation</CardTitle>
-              <Badge variant="success">AI live</Badge>
-            </CardHeader>
-            <CardContent>
-              <div className="space-y-4">
-                {messages.length === 0 && (
-                  <p className="py-8 text-center text-sm text-muted-foreground">
-                    No messages yet.
-                  </p>
-                )}
-                {messages.map((m) => (
-                  <div
-                    key={m.id}
-                    className={`flex ${
-                      m.role === "user" ? "justify-start" : "justify-end"
-                    }`}
-                  >
-                    <div
-                      className={`max-w-[75%] rounded-2xl px-4 py-2.5 text-sm ${
-                        m.role === "user"
-                          ? "bg-muted text-foreground"
-                          : "bg-primary text-primary-foreground"
-                      }`}
-                    >
-                      <p className="whitespace-pre-wrap">{m.message}</p>
-                      <p
-                        className={`mt-1 text-[10px] ${
-                          m.role === "user"
-                            ? "text-muted-foreground"
-                            : "text-primary-foreground/70"
-                        }`}
-                      >
-                        {formatRelativeTime(m.created_at)}
-                      </p>
-                    </div>
-                  </div>
-                ))}
-              </div>
+          <div className="space-y-4 lg:col-span-2">
+            <div className="flex items-center justify-between">
+              <h3 className="font-display text-lg font-semibold">
+                WhatsApp conversation
+              </h3>
+              <Badge variant="success">
+                <span className="mr-0.5 inline-block h-1.5 w-1.5 animate-pulse rounded-full bg-current" />
+                AI live
+              </Badge>
+            </div>
 
-              <div className="mt-6 flex items-center gap-2 border-t border-border pt-4">
-                <input
-                  className="flex-1 rounded-md border border-border bg-background px-3 py-2 text-sm placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring"
-                  placeholder="Take over and reply manually…"
-                />
-                <Button size="sm">Send</Button>
-              </div>
-            </CardContent>
-          </Card>
+            <ChatThread messages={messages} />
+
+            <div className="flex items-center gap-2 rounded-xl border border-border bg-card p-2 shadow-sm">
+              <input
+                className="flex-1 rounded-md bg-transparent px-3 py-2 text-sm placeholder:text-muted-foreground focus:outline-none"
+                placeholder="Take over and reply manually…"
+              />
+              <Button size="sm">Send</Button>
+            </div>
+          </div>
         </div>
       </div>
     </>

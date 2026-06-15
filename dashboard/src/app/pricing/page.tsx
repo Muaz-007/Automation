@@ -115,14 +115,14 @@ export default function PricingPage() {
       {/* Pricing tiers */}
       <section className="py-20">
         <div className="mx-auto max-w-6xl px-6">
-          <div className="grid gap-6 md:grid-cols-3">
+          <div className="grid gap-6 md:grid-cols-3 md:items-stretch">
             {tiers.map((t) => (
               <Card
                 key={t.name}
                 className={
                   t.highlight
-                    ? "relative border-primary/60 shadow-xl shadow-primary/10"
-                    : "border-border"
+                    ? "relative flex flex-col border-primary/60 shadow-xl shadow-primary/10"
+                    : "flex flex-col border-border"
                 }
               >
                 {t.highlight && (
@@ -130,7 +130,7 @@ export default function PricingPage() {
                     <Badge>Most popular</Badge>
                   </div>
                 )}
-                <CardContent className="p-7">
+                <CardContent className="flex flex-1 flex-col p-7">
                   <div className="mb-1 text-sm font-medium text-muted-foreground">
                     {t.name}
                   </div>
@@ -139,7 +139,7 @@ export default function PricingPage() {
                     <span className="text-muted-foreground">{t.period}</span>
                   </div>
                   <p className="mb-7 text-sm text-muted-foreground">{t.desc}</p>
-                  <ul className="mb-6 space-y-2.5 text-sm">
+                  <ul className="mb-6 flex-1 space-y-2.5 text-sm">
                     {t.features.map((feat) => (
                       <li key={feat} className="flex items-start gap-2">
                         <CheckCircle2 className="mt-0.5 h-4 w-4 shrink-0 text-primary" />
@@ -156,7 +156,7 @@ export default function PricingPage() {
                       </li>
                     ))}
                   </ul>
-                  <Link href={t.href}>
+                  <Link href={t.href} className="mt-auto">
                     <Button
                       className="w-full"
                       variant={t.highlight ? "default" : "outline"}

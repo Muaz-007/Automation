@@ -91,15 +91,37 @@ model Tenant {
   created_at      DateTime @default(now()) @db.Timestamptz
   updated_at      DateTime @default(now()) @updatedAt @db.Timestamptz
 
-  users         TenantUser[]
-  configs       TenantConfig[]
-  documents     Document[]
-  customers     Customer[]
-  leads         Lead[]
-  conversations Conversation[]
+  users           TenantUser[]
+  configs         TenantConfig[]
+  documents       Document[]
+  customers       Customer[]
+  leads           Lead[]
+  conversations   Conversation[]
+  inventory_items InventoryItem[]
 
   @@schema("public")
   @@map("tenants")
+}
+
+model InventoryItem {
+  id          String   @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  tenant_id   String   @db.Uuid
+  external_id String?  // SKU / property ID / service ID from source
+  name        String
+  category    String?
+  price_pkr   Int?
+  status      String?  // available / in_stock / sold / etc.
+  description String?
+  data        Json     @default("{}") // industry-specific fields
+  created_at  DateTime @default(now()) @db.Timestamptz
+  updated_at  DateTime @default(now()) @updatedAt @db.Timestamptz
+
+  tenant Tenant @relation(fields: [tenant_id], references: [id], onDelete: Cascade)
+
+  @@index([tenant_id, created_at(sort: Desc)])
+  @@index([tenant_id, category])
+  @@schema("public")
+  @@map("inventory_items")
 }
 
 model TenantUser {

@@ -1,0 +1,21 @@
+id,service,category,duration_minutes,price_pkr,practitioner,requires_appointment,description
+SVC-001,Initial Skin Consultation,Dermatology,30,3000,Dr. Sara Iqbal,true,Comprehensive skin assessment with personalized treatment plan.
+SVC-002,Follow-up Skin Consultation,Dermatology,20,2000,Dr. Sara Iqbal,true,Review session for ongoing treatment plans and adjustments.
+SVC-003,HydraFacial,Aesthetic Treatments,60,9500,Sr. Therapist,true,3-step deep-cleansing facial with hydration boost. Glowing results in one session.
+SVC-004,Chemical Peel - Light,Aesthetic Treatments,45,7500,Dr. Sara Iqbal,true,Glycolic acid peel for pigmentation and texture. Minimal downtime.
+SVC-005,Chemical Peel - Medium,Aesthetic Treatments,60,12000,Dr. Sara Iqbal,true,TCA peel for deeper pigmentation and acne scars. 3-5 days recovery.
+SVC-006,Laser Hair Removal - Face,Laser,30,6500,Sr. Therapist,true,Single session for face. Package of 6 sessions available at 30% off.
+SVC-007,Laser Hair Removal - Full Body,Laser,150,28000,Sr. Therapist,true,Full body Diode laser. Package of 6 sessions: PKR 145,000 (saves 14%).
+SVC-008,PRP for Hair Loss,Trichology,90,18000,Dr. Sara Iqbal,true,Platelet-rich plasma therapy for hair regrowth. Course of 4 sessions recommended.
+SVC-009,Microneedling,Aesthetic Treatments,75,11000,Sr. Therapist,true,Collagen-induction therapy for scars, fine lines, and texture.
+SVC-010,Botox - Forehead Lines,Injectables,30,22000,Dr. Sara Iqbal,true,Allergan Botox to smoothen forehead lines. Results last 4-6 months.
+SVC-011,Botox - Crows Feet,Injectables,30,18000,Dr. Sara Iqbal,true,Allergan Botox for crow's feet around the eyes. Quick lunchtime procedure.
+SVC-012,Dermal Fillers - Lips,Injectables,45,42000,Dr. Sara Iqbal,true,Juvederm lip filler. 1ml syringe. Natural-looking enhancement.
+SVC-013,Acne Treatment Course,Dermatology,45,8500,Dr. Sara Iqbal,true,Tailored acne course including consultation + topical regimen + follow-up.
+SVC-014,Acne Scar Revision,Dermatology,60,15000,Dr. Sara Iqbal,true,Combination treatment (laser + microneedling) for stubborn acne scars.
+SVC-015,Vitamin Drip - Glow,Wellness,60,8000,Nurse Practitioner,true,IV vitamin C + glutathione drip for radiance and brightness.
+SVC-016,Vitamin Drip - Immunity,Wellness,60,7500,Nurse Practitioner,true,High-dose vitamin C + zinc IV. Recommended monthly for busy professionals.
+SVC-017,Bridal Package - Premium,Bridal,300,75000,Multiple Specialists,true,3-session pre-wedding package: HydraFacial + Microneedling + Glow Drip + glow boost.
+SVC-018,Bridal Package - Classic,Bridal,180,42000,Multiple Specialists,true,2-session bridal package: 2x HydraFacial + chemical peel.
+SVC-019,Mole Removal - Per Mole,Minor Procedures,30,4500,Dr. Sara Iqbal,true,Cosmetic mole removal under local anaesthesia. Suturing if required.
+SVC-020,Allergy Patch Test,Dermatology,45,5500,Dr. Sara Iqbal,true,Standard 30-allergen patch test. Results in 48-72 hours with follow-up consultation.

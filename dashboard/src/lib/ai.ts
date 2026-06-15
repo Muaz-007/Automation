@@ -13,20 +13,22 @@ const MODEL = process.env.GEMINI_MODEL ?? "gemini-2.0-flash";
  */
 export const AssistantReplySchema = z.object({
   reply: z.string(),
+  // Gemini returns null for fields it doesn't have values for (since responseSchema
+  // marks them nullable). Use .nullish() so null AND missing both validate.
   extracted_data: z.object({
-    budget: z.string().optional(),
-    area: z.string().optional(),
-    bedrooms: z.number().int().optional(),
-    purpose: z.enum(["buy", "rent"]).optional(),
-    timeline: z.string().optional(),
-    product: z.string().optional(),
-    variant: z.string().optional(),
-    quantity: z.number().int().optional(),
-    address: z.string().optional(),
-    service: z.string().optional(),
-    preferred_date: z.string().optional(),
-    name: z.string().optional(),
-    city: z.string().optional(),
+    budget: z.string().nullish(),
+    area: z.string().nullish(),
+    bedrooms: z.number().int().nullish(),
+    purpose: z.enum(["buy", "rent"]).nullish(),
+    timeline: z.string().nullish(),
+    product: z.string().nullish(),
+    variant: z.string().nullish(),
+    quantity: z.number().int().nullish(),
+    address: z.string().nullish(),
+    service: z.string().nullish(),
+    preferred_date: z.string().nullish(),
+    name: z.string().nullish(),
+    city: z.string().nullish(),
   }),
   lead_status: z.enum(["new", "qualifying", "warm", "hot", "cold"]),
   hot_score: z.number().int().min(0).max(100),
@@ -100,12 +102,16 @@ const industryLabel: Record<string, string> = {
 };
 
 const baseInstructions = `\
+Your job is to handle MOST customer questions independently using the inventory and business context above. Only ask for human help when truly necessary.
+
 When replying:
+- ALWAYS check the "Available inventory" section first. If the customer's question can be answered from it (prices, availability, sizes, locations, packages, etc.), answer directly — quote the exact details from the inventory.
+- If something is not in the inventory, say so honestly. Don't invent facts, prices, sizes, or availability that aren't listed.
 - Keep replies short — 1 to 3 sentences for most messages.
 - Reply in the SAME language the customer uses. Detect from their message: English, Urdu, Roman Urdu, or mixed.
-- Never invent facts about the business, prices, or inventory. If you don't know, say so and offer to connect them with a human.
-- Build rapport — greet, use their name if known, be helpful.
+- Build rapport — greet, use their name if known, be helpful and concise.
 - Ask one qualifying question at a time. Don't interrogate.
+- Proactively suggest relevant items from inventory when the customer's intent matches (e.g. budget + area → suggest matching properties; symptom → suggest matching service).
 
 When updating extracted_data:
 - Only include fields the customer has explicitly mentioned (in this turn or earlier).
@@ -117,12 +123,75 @@ When scoring (hot_score 0–100):
 - 51–75: clear requirements + budget OR timeline
 - 76–100: ready to buy/visit/book this week, urgency signals
 
-Set handoff_to_human=true when:
-- Customer wants to schedule a meeting/visit/call NOW
-- Customer has a complex objection, complaint, or off-topic urgent matter
-- Customer asks something you cannot answer truthfully
-- Customer says they're ready to close/buy/pay
+Set handoff_to_human=true ONLY when:
+- Customer wants to schedule a confirmed visit/call/appointment and a human needs to coordinate logistics.
+- Customer has a complaint, refund, or contractual issue you cannot resolve from inventory.
+- Customer says they're ready to close, pay, or sign — and a human should take over the deal.
+- Customer asks for something genuinely not in the inventory and worth a human follow-up.
+
+Do NOT hand off for: simple price questions, "is this in stock?", availability checks, info already in inventory, or basic FAQs — handle those yourself.
 `;
+
+export type InventoryItemForPrompt = {
+  name: string;
+  external_id?: string | null;
+  category?: string | null;
+  price_pkr?: number | null;
+  status?: string | null;
+  description?: string | null;
+  data?: Record<string, unknown> | null;
+};
+
+/**
+ * Format inventory items as a compact markdown block for the system prompt.
+ * Skips empty fields. Cap items to keep token usage reasonable.
+ */
+export function formatInventory(
+  items: InventoryItemForPrompt[],
+  max = 60,
+): string {
+  if (items.length === 0) return "";
+
+  const visible = items.slice(0, max);
+  const overflow = items.length - visible.length;
+
+  const lines: string[] = ["## Available inventory", ""];
+
+  for (const it of visible) {
+    const head: string[] = [`- **${it.name}**`];
+    if (it.external_id) head.push(`(${it.external_id})`);
+    if (it.price_pkr != null) {
+      head.push(`— Rs. ${it.price_pkr.toLocaleString("en-PK")}`);
+    }
+    if (it.category) head.push(`· ${it.category}`);
+    if (it.status) head.push(`· ${it.status}`);
+    lines.push(head.join(" "));
+
+    if (it.description) {
+      lines.push(`  ${it.description}`);
+    }
+
+    if (it.data && typeof it.data === "object") {
+      const extras: string[] = [];
+      for (const [k, v] of Object.entries(it.data)) {
+        if (v === null || v === undefined || v === "") continue;
+        extras.push(`${k}: ${v}`);
+      }
+      if (extras.length > 0) {
+        lines.push(`  ${extras.join(" | ")}`);
+      }
+    }
+    lines.push("");
+  }
+
+  if (overflow > 0) {
+    lines.push(
+      `_…and ${overflow} more items not shown. Ask the customer to narrow down by category or filter if they want options beyond the above._`,
+    );
+  }
+
+  return lines.join("\n");
+}
 
 export type BuildPromptArgs = {
   businessName: string;
@@ -134,6 +203,7 @@ export type BuildPromptArgs = {
   customSystemPrompt?: string | null;
   customerName?: string | null;
   customerCity?: string | null;
+  inventory?: InventoryItemForPrompt[];
 };
 
 export function buildSystemPrompt(args: BuildPromptArgs): string {
@@ -144,6 +214,11 @@ export function buildSystemPrompt(args: BuildPromptArgs): string {
           .join(", ")}.`
       : "";
 
+  const inventoryBlock =
+    args.inventory && args.inventory.length > 0
+      ? formatInventory(args.inventory)
+      : "_No inventory items have been added yet. If the customer asks about specific products/properties/services, set handoff_to_human=true._";
+
   return [
     `You are ${args.aiPersonaName}, a ${args.aiTone} sales assistant for ${args.businessName}, a ${industryLabel[args.industry] ?? args.industry} business.`,
     "",
@@ -151,6 +226,8 @@ export function buildSystemPrompt(args: BuildPromptArgs): string {
     "",
     `Default language preference: ${args.language}.`,
     customerLine,
+    "",
+    inventoryBlock,
     "",
     baseInstructions,
   ].join("\n");

@@ -17,6 +17,7 @@ import { Badge } from "@/components/ui/badge";
 import { DashboardPreview } from "@/components/landing/dashboard-preview";
 import { SiteNav } from "@/components/landing/site-nav";
 import { SiteFooter } from "@/components/landing/site-footer";
+import { TiltCard } from "@/components/tilt-card";
 
 const briefFeatures = [
   {
@@ -124,7 +125,7 @@ export default function LandingPage() {
           variant="small"
         />
 
-        <div className="mx-auto max-w-6xl px-6 pt-20 md:pt-28 pb-12">
+        <div className="mx-auto max-w-6xl px-6 pt-12 md:pt-16 pb-12">
           <div className="mx-auto max-w-3xl text-center animate-in fade-in slide-in-from-bottom-4 duration-700">
             <Badge variant="success" className="mb-5">
               <Sparkles className="h-3 w-3" /> AI for WhatsApp Business
@@ -173,10 +174,12 @@ export default function LandingPage() {
           </div>
         </div>
 
-        {/* Dashboard preview */}
+        {/* Dashboard preview with mouse-follow 3D tilt */}
         <div id="preview" className="mx-auto max-w-7xl px-6 pb-20">
           <div className="animate-in fade-in slide-in-from-bottom-8 duration-1000">
-            <DashboardPreview />
+            <TiltCard intensity={4} className="cursor-default">
+              <DashboardPreview />
+            </TiltCard>
           </div>
         </div>
       </section>
@@ -219,7 +222,7 @@ export default function LandingPage() {
             {briefIndustries.map((ind) => (
               <Card
                 key={ind.tag}
-                className="group relative overflow-hidden border-border transition-all hover:-translate-y-1 hover:border-primary/40 hover:shadow-lg"
+                className="card-3d group relative overflow-hidden border-border hover:border-primary/40 hover:shadow-xl hover:shadow-primary/10"
               >
                 <CardContent className="p-6">
                   <div className="mb-4 flex items-center justify-between">
@@ -261,7 +264,7 @@ export default function LandingPage() {
             {briefFeatures.map((f) => (
               <Card
                 key={f.title}
-                className="group border-border transition-all hover:border-primary/40 hover:shadow-md"
+                className="card-3d group border-border hover:border-primary/40 hover:shadow-xl hover:shadow-primary/10"
               >
                 <CardContent className="p-6">
                   <div className="mb-4 inline-flex h-10 w-10 items-center justify-center rounded-lg bg-accent text-accent-foreground transition-transform group-hover:scale-110">
@@ -366,24 +369,29 @@ function FloatingBubble({
   variant?: "default" | "alt" | "small";
 }) {
   const size =
-    variant === "small" ? "h-10 w-10" : variant === "alt" ? "h-14 w-14" : "h-12 w-12";
+    variant === "small" ? "h-12 w-12" : variant === "alt" ? "h-16 w-16" : "h-14 w-14";
   const tone =
     variant === "alt"
-      ? "from-emerald-300/50 to-emerald-500/30"
-      : "from-emerald-400/60 to-emerald-600/40";
+      ? "from-emerald-300/60 to-emerald-500/35"
+      : "from-emerald-400/70 to-emerald-600/45";
   return (
     <div
       aria-hidden
-      className={`absolute -z-10 ${size} ${className} animate-pulse`}
-      style={{ animationDelay: `${delay}s`, animationDuration: "5s" }}
+      className={`absolute -z-10 ${className} animate-float`}
+      style={{
+        animationDelay: `${delay}s`,
+        perspective: "600px",
+        transformStyle: "preserve-3d",
+      }}
     >
       <div
-        className={`flex h-full w-full items-center justify-center rounded-2xl border border-primary/30 bg-linear-to-br ${tone} shadow-lg shadow-primary/10 backdrop-blur-sm`}
+        className={`relative ${size} flex items-center justify-center rounded-2xl border border-primary/40 bg-linear-to-br ${tone} shadow-2xl shadow-primary/20 backdrop-blur-sm`}
+        style={{ transform: "translateZ(20px)" }}
       >
         <svg
           viewBox="0 0 24 24"
           fill="none"
-          className="h-5 w-5 text-white/90"
+          className="h-6 w-6 text-white drop-shadow-md"
           aria-hidden
         >
           <path
@@ -392,9 +400,14 @@ function FloatingBubble({
             strokeWidth="1.8"
             strokeLinejoin="round"
             fill="currentColor"
-            fillOpacity="0.15"
+            fillOpacity="0.2"
           />
         </svg>
+        {/* Soft drop shadow under the bubble (gives it the "floating" feel) */}
+        <div
+          aria-hidden
+          className="absolute -bottom-3 left-1/2 h-2 w-3/4 -translate-x-1/2 rounded-full bg-emerald-900/20 blur-md"
+        />
       </div>
     </div>
   );

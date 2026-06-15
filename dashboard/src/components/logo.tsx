@@ -4,16 +4,16 @@ type Size = "sm" | "md" | "lg";
 
 const SIZES: Record<
   Size,
-  { mark: string; markIcon: string; wordmark: string; gap: string }
+  { mark: string; wordmark: string; gap: string }
 > = {
-  sm: { mark: "h-7 w-7", markIcon: "h-3.5 w-3.5", wordmark: "text-sm", gap: "gap-2" },
-  md: { mark: "h-9 w-9", markIcon: "h-4 w-4", wordmark: "text-base", gap: "gap-2.5" },
-  lg: { mark: "h-12 w-12", markIcon: "h-6 w-6", wordmark: "text-xl", gap: "gap-3" },
+  sm: { mark: "h-7 w-7", wordmark: "text-sm", gap: "gap-2" },
+  md: { mark: "h-9 w-9", wordmark: "text-base", gap: "gap-2.5" },
+  lg: { mark: "h-12 w-12", wordmark: "text-xl", gap: "gap-3" },
 };
 
 /**
- * Brand mark — a chat-bubble glyph with an embedded spark, gradient-filled.
- * Pure SVG, scales cleanly, supports light + dark mode.
+ * Brand mark — an AI sparkle with a smaller secondary spark, gradient-filled.
+ * Standalone SVG (no container box) — premium, distinct, scales cleanly.
  */
 export function LogoMark({
   className,
@@ -23,40 +23,79 @@ export function LogoMark({
   size?: Size;
 }) {
   const sz = SIZES[size];
+  // Unique gradient ID per instance to avoid SVG defs conflicts when the
+  // component is rendered multiple times on the same page.
+  const gradId = `logo-grad-${size}`;
+
   return (
     <span
       className={cn(
-        "relative inline-flex items-center justify-center rounded-xl shadow-sm",
-        "bg-linear-to-br from-emerald-500 to-emerald-700",
+        "inline-flex items-center justify-center",
+        "drop-shadow-[0_3px_8px_rgb(16_185_129/0.35)]",
         sz.mark,
         className,
       )}
+      aria-hidden
     >
       <svg
-        viewBox="0 0 24 24"
+        viewBox="0 0 32 32"
         fill="none"
         xmlns="http://www.w3.org/2000/svg"
-        className={cn("text-white", sz.markIcon)}
-        aria-hidden
+        className="h-full w-full"
       >
-        {/* Chat bubble outline */}
+        <defs>
+          <linearGradient
+            id={gradId}
+            x1="4"
+            y1="2"
+            x2="28"
+            y2="30"
+            gradientUnits="userSpaceOnUse"
+          >
+            <stop offset="0%" stopColor="#34d399" />
+            <stop offset="55%" stopColor="#10b981" />
+            <stop offset="100%" stopColor="#047857" />
+          </linearGradient>
+          <linearGradient
+            id={`${gradId}-2`}
+            x1="20"
+            y1="4"
+            x2="30"
+            y2="14"
+            gradientUnits="userSpaceOnUse"
+          >
+            <stop offset="0%" stopColor="#6ee7b7" />
+            <stop offset="100%" stopColor="#10b981" />
+          </linearGradient>
+        </defs>
+
+        {/* Main 4-point AI sparkle with curved arms */}
         <path
-          d="M21 11.5a8.38 8.38 0 0 1-3.8 7L18 22l-4.3-2.1A9 9 0 1 1 21 11.5Z"
-          fill="currentColor"
-          fillOpacity="0.18"
+          d="M16 2.5
+             C 16 2.5  16.6 12  18.4 13.7
+             C 20.1 15.5  29.5 16  29.5 16
+             C 29.5 16  20.1 16.5  18.4 18.3
+             C 16.6 20  16 29.5 16 29.5
+             C 16 29.5  15.4 20  13.6 18.3
+             C 11.9 16.5  2.5 16  2.5 16
+             C 2.5 16  11.9 15.5  13.6 13.7
+             C 15.4 12  16 2.5 16 2.5 Z"
+          fill={`url(#${gradId})`}
         />
+
+        {/* Small secondary sparkle (top-right accent) */}
         <path
-          d="M21 11.5a8.38 8.38 0 0 1-3.8 7L18 22l-4.3-2.1A9 9 0 1 1 21 11.5Z"
-          stroke="currentColor"
-          strokeWidth="1.8"
-          strokeLinejoin="round"
-        />
-        {/* Inner spark (AI accent) */}
-        <path
-          d="M12 8.2v1.4M12 13.2v1.4M9.2 11.5h-1.4M16.2 11.5h-1.4M10.4 9.9l-1-1M14.5 13.9l-1-1M10.4 13.1l-1 1M14.5 9l-1 1"
-          stroke="currentColor"
-          strokeWidth="1.5"
-          strokeLinecap="round"
+          d="M25 4
+             C 25 4  25.3 7.5  26.1 8.3
+             C 26.9 9.1  30.5 9.5  30.5 9.5
+             C 30.5 9.5  26.9 9.9  26.1 10.7
+             C 25.3 11.5  25 15 25 15
+             C 25 15  24.7 11.5  23.9 10.7
+             C 23.1 9.9  19.5 9.5  19.5 9.5
+             C 19.5 9.5  23.1 9.1  23.9 8.3
+             C 24.7 7.5  25 4 25 4 Z"
+          fill={`url(#${gradId}-2)`}
+          opacity="0.85"
         />
       </svg>
     </span>
@@ -65,7 +104,7 @@ export function LogoMark({
 
 /**
  * Full logo: mark + wordmark.
- * Wordmark uses font-display (Bricolage / Instrument fallback) with a tight tracking.
+ * Wordmark uses the display font with a tight letter-spacing.
  */
 export function Logo({
   size = "md",
@@ -80,10 +119,10 @@ export function Logo({
   const sz = SIZES[size];
   const hideClass =
     hideTextOn === "sm"
-      ? "hidden sm:inline"
+      ? "hidden sm:inline-flex"
       : hideTextOn === "md"
-        ? "hidden md:inline"
-        : "";
+        ? "hidden md:inline-flex"
+        : "inline-flex";
 
   return (
     <span className={cn("inline-flex items-center", sz.gap, className)}>
@@ -95,7 +134,8 @@ export function Logo({
           hideClass,
         )}
       >
-        Whatsapp<span className="text-primary">Automate</span>
+        Whats<span className="text-primary">App</span>
+        <span className="ml-1 text-foreground/85">Automate</span>
       </span>
     </span>
   );

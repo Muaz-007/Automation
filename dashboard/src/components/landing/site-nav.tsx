@@ -55,7 +55,10 @@ export function SiteNav() {
         </nav>
 
         <div className="flex items-center gap-2">
-          <ThemeToggle />
+          {/* Theme toggle: desktop only — mobile users get it inside the hamburger menu */}
+          <div className="hidden md:inline-flex">
+            <ThemeToggle />
+          </div>
           <Link href="/login" className="hidden sm:block">
             <Button variant="ghost" size="sm">Sign in</Button>
           </Link>
@@ -106,6 +109,11 @@ export function SiteNav() {
                   Get started
                 </Button>
               </Link>
+            </div>
+            {/* Theme toggle row */}
+            <div className="mt-2 flex items-center justify-between border-t border-border pt-3 px-1">
+              <span className="text-sm text-muted-foreground">Theme</span>
+              <ThemeToggle />
             </div>
           </nav>
         </div>

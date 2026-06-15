@@ -145,7 +145,7 @@ export default function FeaturesPage() {
             {features.map((f) => (
               <Card
                 key={f.title}
-                className="group border-border transition-all hover:border-primary/40 hover:shadow-md"
+                className="card-3d group border-border hover:border-primary/40 hover:shadow-xl hover:shadow-primary/10"
               >
                 <CardContent className="p-8">
                   <div className="mb-5 inline-flex h-12 w-12 items-center justify-center rounded-xl bg-accent text-accent-foreground transition-transform group-hover:scale-110">

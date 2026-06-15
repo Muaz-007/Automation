@@ -29,14 +29,14 @@
 @custom-variant dark (&:where(.dark, .dark *));
 
 :root {
-  --background: #ffffff;
-  --foreground: #09090b;
-  --card: #ffffff;
-  --card-foreground: #09090b;
-  --muted: #f4f4f5;
-  --muted-foreground: #71717a;
-  --border: #e4e4e7;
-  --input: #e4e4e7;
+  --background: #faf9f6;         /* Warm off-white — softer than pure white */
+  --foreground: #1c1917;         /* Warm stone — softer than near-black */
+  --card: #ffffff;               /* Pure white cards pop against bg */
+  --card-foreground: #1c1917;
+  --muted: #f0eee8;              /* Warm muted background */
+  --muted-foreground: #57534e;   /* Stone-600 — better contrast for body */
+  --border: #e7e5e0;             /* Warm border */
+  --input: #e7e5e0;
   --ring: #10b981;
   --primary: #059669;
   --primary-foreground: #ffffff;
@@ -124,4 +124,40 @@ body,
 /* Focus ring polish */
 :focus-visible {
   outline: none;
+}
+
+/* Floating bubble animation — slow vertical drift + tilt */
+@keyframes float-y {
+  0%,
+  100% {
+    transform: translateY(0) rotate(-3deg);
+  }
+  50% {
+    transform: translateY(-14px) rotate(3deg);
+  }
+}
+
+.animate-float {
+  animation: float-y 7s ease-in-out infinite;
+}
+
+/* Soft hover lift with subtle 3D tilt for cards */
+.card-3d {
+  transition:
+    transform 0.35s cubic-bezier(0.16, 1, 0.3, 1),
+    box-shadow 0.35s cubic-bezier(0.16, 1, 0.3, 1),
+    border-color 0.35s ease;
+  transform-style: preserve-3d;
+}
+.card-3d:hover {
+  transform: translateY(-6px) rotateX(2deg);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-float {
+    animation: none;
+  }
+  .card-3d:hover {
+    transform: translateY(-2px);
+  }
 }

@@ -40,7 +40,8 @@ export function DashboardPreview() {
               <LogoMark size="sm" />
               <div className="text-xs">
                 <div className="font-display font-semibold">
-                  Whatsapp<span className="text-primary">Automate</span>
+                  Whats<span className="text-primary">App</span>
+                  <span className="ml-1">Automate</span>
                 </div>
                 <div className="text-muted-foreground">Prime Properties</div>
               </div>

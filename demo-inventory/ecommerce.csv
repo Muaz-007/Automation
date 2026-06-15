@@ -1,0 +1,26 @@
+sku,name,category,variants,colors,price_pkr,stock,status,description
+HD-BLK-M,Black Oversized Hoodie,Hoodies,"S,M,L,XL","Black,Charcoal,Navy",2499,42,in_stock,Heavyweight 400gsm fleece hoodie. Unisex fit. Embroidered logo.
+TS-PLN-M,Classic White Tee,T-Shirts,"S,M,L,XL,XXL","White,Black,Grey,Olive",899,180,in_stock,Premium combed cotton crew-neck. Soft hand-feel. Machine washable.
+JN-DBL-32,Dark Blue Slim Jeans,Jeans,"30,32,34,36,38","Dark Blue,Black,Light Blue",2999,28,in_stock,Stretch denim with tapered leg. Available in 3 washes.
+KR-OFFW-M,Cotton Kurta - Off White,Kurtas,"S,M,L,XL","Off White,Black,Navy,Sage",1899,55,in_stock,Hand-block printed cotton kurta. Perfect for everyday wear.
+SH-CHK-L,Checkered Casual Shirt,Shirts,"S,M,L,XL","Blue Check,Red Check,Green Check",1599,34,in_stock,Soft brushed cotton with chest pocket. Tailored fit.
+SN-WHT-9,White Lifestyle Sneakers,Footwear,"7,8,9,10,11","White,Black,Beige",4499,18,low_stock,Vegan leather upper with memory foam insole. Limited stock — restocking next month.
+BG-BLK-OS,Black Crossbody Bag,Bags,One Size,"Black,Brown,Cognac",1799,62,in_stock,Vegan leather crossbody with adjustable strap and inner zip pocket.
+JK-DNM-L,Vintage Denim Jacket,Jackets,"S,M,L,XL","Light Wash,Dark Wash",3299,12,low_stock,Classic trucker-style denim jacket. Pre-washed for that broken-in feel.
+SH-LNN-WHT,Linen Beach Shirt,Shirts,"S,M,L,XL","White,Sand,Sky Blue",2199,40,in_stock,100% linen short-sleeve shirt. Breathable for hot weather.
+SK-PLT-S,Pleated Midi Skirt,Skirts,"XS,S,M,L","Black,Burgundy,Olive",2799,22,in_stock,High-waisted pleated midi skirt with elastic waistband.
+DR-WRP-M,Wrap Maxi Dress,Dresses,"XS,S,M,L,XL","Floral Pink,Solid Black,Floral Blue",3499,15,low_stock,Long flowy wrap dress with adjustable tie. Side slit for movement.
+HD-CRP-L,Cropped Sweatshirt,Hoodies,"S,M,L","Lilac,Cream,Sage",1999,38,in_stock,Cropped fit pullover with raw-edge hem. Comfortable cotton blend.
+TR-CGO-32,Cargo Trousers,Trousers,"30,32,34,36","Olive,Black,Khaki",2499,0,out_of_stock,Wide-leg cargo trousers with 6 functional pockets. Restock expected in 2 weeks.
+WT-LTH-OS,Leather Wallet,Accessories,One Size,"Brown,Black,Tan",1299,90,in_stock,Bifold genuine leather wallet with 8 card slots and ID window.
+SC-WLY-OS,Wool Scarf,Accessories,One Size,"Camel,Grey,Burgundy,Navy",1599,46,in_stock,Soft wool blend scarf. Perfect for layering through winter.
+HD-ZIP-XL,Zip-Up Hoodie,Hoodies,"S,M,L,XL,XXL","Charcoal,Maroon,Forest",2799,30,in_stock,Full-zip hoodie with kangaroo pockets and ribbed cuffs.
+TS-PRT-M,Printed Graphic Tee,T-Shirts,"S,M,L,XL","Cream,Black,Faded Pink",1199,72,in_stock,Soft cotton tee with retro chest graphic. Pre-shrunk.
+SH-OXF-M,Oxford Button-Down,Shirts,"S,M,L,XL","White,Sky Blue,Pink",1899,48,in_stock,Classic oxford cotton shirt. Office or casual wear.
+SK-DNM-S,Denim Mini Skirt,Skirts,"XS,S,M,L","Light Blue,Dark Blue,Black",1899,8,low_stock,A-line denim mini with button-front closure.
+JL-GLD-OS,Gold Layered Necklace,Jewelry,One Size,Gold,899,120,in_stock,Three-layer gold-plated chain necklace. Tarnish-resistant.
+DR-SLP-M,Satin Slip Dress,Dresses,"XS,S,M,L","Champagne,Emerald,Black",2999,20,in_stock,Bias-cut satin slip dress with adjustable straps.
+BG-TT-OS,Canvas Tote Bag,Bags,One Size,"Natural,Black,Olive",799,150,in_stock,Heavy canvas tote with reinforced handles. Eco-friendly choice.
+KR-EMB-L,Embroidered Kurta - Black,Kurtas,"S,M,L,XL,XXL","Black,Maroon,Navy",2799,25,in_stock,Hand-embroidered chest panel. Perfect for festive occasions.
+SN-RUN-10,Running Trainers,Footwear,"7,8,9,10,11,12","Black/White,All Black,Grey",5999,33,in_stock,Cushioned trainers with breathable mesh upper. Lightweight design.
+WT-WMN-OS,Cardholder Wallet,Accessories,One Size,"Pink,Black,Tan",899,85,in_stock,Slim cardholder wallet with snap closure. Holds up to 6 cards.
