@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { MessageCircle } from "lucide-react";
+import { Logo } from "@/components/logo";
 
 export default function AuthLayout({
   children,
@@ -9,11 +9,8 @@ export default function AuthLayout({
   return (
     <div className="grid min-h-dvh lg:grid-cols-2">
       <div className="flex flex-col px-6 py-8 lg:px-12">
-        <Link href="/" className="mb-12 inline-flex items-center gap-2">
-          <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-primary text-primary-foreground">
-            <MessageCircle className="h-4 w-4" />
-          </div>
-          <span className="text-base font-semibold">WhatsappAutomate</span>
+        <Link href="/" className="mb-12 inline-flex" aria-label="WhatsappAutomate home">
+          <Logo size="md" />
         </Link>
         <div className="mx-auto flex w-full max-w-sm flex-1 flex-col justify-center">
           {children}

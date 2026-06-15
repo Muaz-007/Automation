@@ -9,7 +9,7 @@ export const metadata: Metadata = {
 };
 
 const COMPANY_NAME = "WhatsappAutomate";
-const CONTACT_EMAIL = "hiveofsolutionspro@gmail.com";
+const CONTACT_EMAIL = "muaz.developments@gmail.com";
 
 export default function TermsPage() {
   return (
@@ -163,7 +163,7 @@ export default function TermsPage() {
       <H2>13. Governing law and disputes</H2>
       <P>
         These Terms are governed by the laws of the Islamic Republic of
-        Pakistan. Any dispute will be resolved in the courts of Karachi,
+        Pakistan. Any dispute will be resolved in the courts of Lahore,
         Pakistan, unless local consumer-protection law gives you a
         non-waivable right to a different forum.
       </P>

@@ -7,94 +7,56 @@ import {
   Clock,
   LayoutDashboard,
   MessageCircle,
-  ShieldCheck,
   ShoppingBag,
   Sparkles,
   Stethoscope,
-  Zap,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { DashboardPreview } from "@/components/landing/dashboard-preview";
-import { FAQ } from "@/components/landing/faq";
-import { ThemeToggle } from "@/components/theme-toggle";
+import { SiteNav } from "@/components/landing/site-nav";
+import { SiteFooter } from "@/components/landing/site-footer";
 
-const features = [
+const briefFeatures = [
   {
     icon: MessageCircle,
     title: "24/7 AI Conversations",
-    desc: "Instant replies to every WhatsApp message — even at 3am or on weekends.",
+    desc: "Instant replies — even at 3am or on weekends.",
   },
   {
     icon: Sparkles,
     title: "Industry-Specific AI",
-    desc: "Specialized agents for Real Estate, E-commerce, and Clinics — pre-trained for your vertical.",
+    desc: "Pre-trained for real estate, e-commerce, and clinics.",
   },
   {
     icon: LayoutDashboard,
     title: "Lead Dashboard",
-    desc: "All leads in one place. Filter by hot, warm, or cold; assign to team members; track status.",
-  },
-  {
-    icon: ShieldCheck,
-    title: "Multi-Tenant Secure",
-    desc: "Your data stays yours. Row-level security and encrypted credentials end-to-end.",
-  },
-  {
-    icon: Zap,
-    title: "n8n-Powered Workflows",
-    desc: "Built on the n8n automation engine — fast, reliable, infinitely customizable.",
-  },
-  {
-    icon: Bot,
-    title: "Document-Trained AI",
-    desc: "Upload your website or PDFs — the AI builds a knowledge base of your business automatically.",
+    desc: "All leads in one place. Hot, warm, cold — filtered, scored, assigned.",
   },
 ];
 
-const pricing = [
+const briefIndustries = [
   {
-    name: "Starter",
-    price: "₨ 4,999",
-    period: "/month",
-    desc: "Solo agents and small stores",
-    features: [
-      "1 WhatsApp number",
-      "500 conversations/month",
-      "Basic AI templates",
-      "Lead dashboard",
-    ],
-    cta: "Start free trial",
+    icon: Building2,
+    tag: "Real Estate",
+    tagVariant: "default" as const,
+    title: "Brokers & Agencies",
+    desc: "Auto-qualify by budget, area, BHK. Share property catalogs, schedule visits, get hot-lead alerts.",
   },
   {
-    name: "Growth",
-    price: "₨ 12,999",
-    period: "/month",
-    desc: "Most popular for SMBs",
-    features: [
-      "2 WhatsApp numbers",
-      "2,000 conversations/month",
-      "All industry templates",
-      "Document-trained AI",
-      "Multi-user team",
-    ],
-    cta: "Start free trial",
-    highlight: true,
+    icon: ShoppingBag,
+    tag: "E-commerce",
+    tagVariant: "info" as const,
+    title: "Online Sellers",
+    desc: "Product catalog, order taking in WhatsApp, COD confirmation, abandoned-cart recovery.",
   },
   {
-    name: "Pro",
-    price: "₨ 24,999",
-    period: "/month",
-    desc: "Scaling businesses",
-    features: [
-      "5 WhatsApp numbers",
-      "10,000 conversations/month",
-      "API + integrations",
-      "Priority support",
-      "Custom workflows",
-    ],
-    cta: "Talk to sales",
+    icon: Stethoscope,
+    tag: "Healthcare",
+    tagVariant: "success" as const,
+    title: "Clinics & Doctors",
+    desc: "24/7 appointment booking, auto-reminders, intake forms, treatment packages.",
   },
 ];
 
@@ -125,56 +87,69 @@ const testimonials = [
 export default function LandingPage() {
   return (
     <div className="min-h-dvh">
-      {/* Navbar */}
-      <header className="sticky top-0 z-50 border-b border-border bg-background/80 backdrop-blur">
-        <div className="mx-auto flex h-16 max-w-6xl items-center justify-between px-6">
-          <Link href="/" className="flex items-center gap-2">
-            <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-primary text-primary-foreground">
-              <MessageCircle className="h-4 w-4" />
-            </div>
-            <span className="text-base font-semibold">WhatsappAutomate</span>
-          </Link>
-          <nav className="hidden items-center gap-6 text-sm md:flex">
-            <a href="#industries" className="text-muted-foreground hover:text-foreground transition-colors">Industries</a>
-            <a href="#features" className="text-muted-foreground hover:text-foreground transition-colors">Features</a>
-            <a href="#pricing" className="text-muted-foreground hover:text-foreground transition-colors">Pricing</a>
-            <a href="#faq" className="text-muted-foreground hover:text-foreground transition-colors">FAQ</a>
-          </nav>
-          <div className="flex items-center gap-2">
-            <ThemeToggle />
-            <Link href="/login" className="hidden sm:block">
-              <Button variant="ghost" size="sm">Sign in</Button>
-            </Link>
-            <Link href="/signup">
-              <Button size="sm">Get started</Button>
-            </Link>
-          </div>
-        </div>
-      </header>
+      <SiteNav />
 
       {/* Hero */}
       <section className="relative overflow-hidden">
+        {/* Background decorations */}
         <div
           aria-hidden
           className="pointer-events-none absolute inset-0 -z-10 bg-[radial-gradient(ellipse_at_top,_var(--accent)_0%,_transparent_50%)] opacity-70"
         />
         <div
           aria-hidden
-          className="pointer-events-none absolute inset-x-0 top-0 -z-10 h-px bg-gradient-to-r from-transparent via-primary/30 to-transparent"
+          className="pointer-events-none absolute inset-x-0 top-0 -z-10 h-px bg-linear-to-r from-transparent via-primary/30 to-transparent"
         />
+        {/* Subtle dot grid */}
+        <div
+          aria-hidden
+          className="pointer-events-none absolute inset-0 -z-10 opacity-[0.18] [mask-image:radial-gradient(ellipse_at_top,_black_30%,_transparent_70%)]"
+          style={{
+            backgroundImage:
+              "radial-gradient(circle, currentColor 1px, transparent 1px)",
+            backgroundSize: "24px 24px",
+            color: "var(--muted-foreground)",
+          }}
+        />
+        {/* Floating chat-bubble decorations */}
+        <FloatingBubble className="left-6 top-32 hidden md:block" delay={0} />
+        <FloatingBubble
+          className="right-8 top-44 hidden md:block"
+          delay={0.4}
+          variant="alt"
+        />
+        <FloatingBubble
+          className="left-20 top-72 hidden lg:block"
+          delay={0.8}
+          variant="small"
+        />
+
         <div className="mx-auto max-w-6xl px-6 pt-20 md:pt-28 pb-12">
           <div className="mx-auto max-w-3xl text-center animate-in fade-in slide-in-from-bottom-4 duration-700">
-            <Badge variant="success" className="mb-4">
+            <Badge variant="success" className="mb-5">
               <Sparkles className="h-3 w-3" /> AI for WhatsApp Business
             </Badge>
-            <h1 className="text-balance text-4xl font-bold tracking-tight md:text-6xl">
+            <h1 className="font-display text-balance text-4xl font-bold leading-[1.05] tracking-tight md:text-6xl">
               Capture every WhatsApp lead —{" "}
-              <span className="bg-gradient-to-r from-primary to-emerald-500 bg-clip-text text-transparent">
-                automatically
-              </span>
+              <em className="font-serif text-primary not-italic relative">
+                <span className="italic">automatically</span>
+                <svg
+                  aria-hidden
+                  viewBox="0 0 220 12"
+                  className="absolute -bottom-2 left-0 w-full text-primary/40"
+                >
+                  <path
+                    d="M2 8 C 60 -2, 160 -2, 218 6"
+                    stroke="currentColor"
+                    strokeWidth="3"
+                    fill="none"
+                    strokeLinecap="round"
+                  />
+                </svg>
+              </em>
               , 24/7
             </h1>
-            <p className="mx-auto mt-6 max-w-2xl text-pretty text-lg text-muted-foreground">
+            <p className="mx-auto mt-7 max-w-2xl text-pretty text-lg leading-relaxed text-muted-foreground">
               An AI assistant for real estate, e-commerce, and clinics that
               chats with your customers on WhatsApp, qualifies leads, and hands
               them to you in a clean dashboard.
@@ -217,7 +192,7 @@ export default function LandingPage() {
               { label: "Industries", value: "3 specialized" },
             ].map((s) => (
               <div key={s.label} className="text-center">
-                <div className="text-2xl font-bold text-primary md:text-3xl">
+                <div className="font-display text-2xl font-bold text-primary md:text-3xl">
                   {s.value}
                 </div>
                 <div className="text-sm text-muted-foreground">{s.label}</div>
@@ -227,12 +202,12 @@ export default function LandingPage() {
         </div>
       </section>
 
-      {/* Industries */}
-      <section id="industries" className="border-t border-border py-20">
+      {/* Brief industries */}
+      <section className="border-t border-border py-20">
         <div className="mx-auto max-w-6xl px-6">
           <div className="mx-auto max-w-2xl text-center">
             <Badge variant="muted" className="mb-3">Industries</Badge>
-            <h2 className="text-3xl font-bold tracking-tight md:text-4xl">
+            <h2 className="font-display text-3xl font-bold tracking-tight md:text-4xl">
               Built for the businesses that live on WhatsApp
             </h2>
             <p className="mt-4 text-muted-foreground">
@@ -241,60 +216,49 @@ export default function LandingPage() {
             </p>
           </div>
           <div className="mt-12 grid gap-6 md:grid-cols-3">
-            <IndustryCard
-              icon={Building2}
-              tag="Real Estate"
-              tagVariant="default"
-              title="Brokers & Agencies"
-              points={[
-                "Auto-qualify by budget, area, BHK",
-                "Share property catalogs in chat",
-                "Schedule site visits",
-                "Hot-lead alerts to your phone",
-              ]}
-            />
-            <IndustryCard
-              icon={ShoppingBag}
-              tag="E-commerce"
-              tagVariant="info"
-              title="Online Sellers"
-              points={[
-                "Product catalog auto-share",
-                "Order taking in WhatsApp",
-                "COD confirmation",
-                "Abandoned cart recovery",
-              ]}
-            />
-            <IndustryCard
-              icon={Stethoscope}
-              tag="Healthcare"
-              tagVariant="success"
-              title="Clinics & Doctors"
-              points={[
-                "24/7 appointment booking",
-                "Auto-reminders to reduce no-shows",
-                "Pre-consultation intake forms",
-                "Treatment packages",
-              ]}
-            />
+            {briefIndustries.map((ind) => (
+              <Card
+                key={ind.tag}
+                className="group relative overflow-hidden border-border transition-all hover:-translate-y-1 hover:border-primary/40 hover:shadow-lg"
+              >
+                <CardContent className="p-6">
+                  <div className="mb-4 flex items-center justify-between">
+                    <div className="inline-flex h-10 w-10 items-center justify-center rounded-lg bg-accent text-accent-foreground">
+                      <ind.icon className="h-5 w-5" />
+                    </div>
+                    <Badge variant={ind.tagVariant}>{ind.tag}</Badge>
+                  </div>
+                  <h3 className="mb-2 text-lg font-semibold">{ind.title}</h3>
+                  <p className="text-sm text-muted-foreground">{ind.desc}</p>
+                </CardContent>
+              </Card>
+            ))}
+          </div>
+          <div className="mt-10 text-center">
+            <Link href="/industries">
+              <Button variant="outline">
+                Explore industries
+                <ArrowRight className="h-4 w-4" />
+              </Button>
+            </Link>
           </div>
         </div>
       </section>
 
-      {/* Features */}
-      <section id="features" className="border-t border-border bg-muted/30 py-20">
+      {/* Brief features */}
+      <section className="border-t border-border bg-muted/30 py-20">
         <div className="mx-auto max-w-6xl px-6">
           <div className="mx-auto max-w-2xl text-center">
             <Badge variant="muted" className="mb-3">Features</Badge>
-            <h2 className="text-3xl font-bold tracking-tight md:text-4xl">
+            <h2 className="font-display text-3xl font-bold tracking-tight md:text-4xl">
               Everything you need to run on WhatsApp
             </h2>
             <p className="mt-4 text-muted-foreground">
               From the first hello to a closed deal — automated.
             </p>
           </div>
-          <div className="mt-12 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-            {features.map((f) => (
+          <div className="mt-12 grid gap-6 md:grid-cols-3">
+            {briefFeatures.map((f) => (
               <Card
                 key={f.title}
                 className="group border-border transition-all hover:border-primary/40 hover:shadow-md"
@@ -309,6 +273,14 @@ export default function LandingPage() {
               </Card>
             ))}
           </div>
+          <div className="mt-10 text-center">
+            <Link href="/features">
+              <Button variant="outline">
+                See all features
+                <ArrowRight className="h-4 w-4" />
+              </Button>
+            </Link>
+          </div>
         </div>
       </section>
 
@@ -317,7 +289,7 @@ export default function LandingPage() {
         <div className="mx-auto max-w-6xl px-6">
           <div className="mx-auto max-w-2xl text-center">
             <Badge variant="muted" className="mb-3">Loved by founders</Badge>
-            <h2 className="text-3xl font-bold tracking-tight md:text-4xl">
+            <h2 className="font-display text-3xl font-bold tracking-tight md:text-4xl">
               Real businesses, real results
             </h2>
           </div>
@@ -347,78 +319,6 @@ export default function LandingPage() {
         </div>
       </section>
 
-      {/* Pricing */}
-      <section id="pricing" className="border-t border-border bg-muted/30 py-20">
-        <div className="mx-auto max-w-6xl px-6">
-          <div className="mx-auto max-w-2xl text-center">
-            <Badge variant="muted" className="mb-3">Pricing</Badge>
-            <h2 className="text-3xl font-bold tracking-tight md:text-4xl">
-              Simple, transparent pricing
-            </h2>
-            <p className="mt-4 text-muted-foreground">
-              Pay monthly, cancel anytime. ROI in your first closed deal.
-            </p>
-          </div>
-          <div className="mt-12 grid gap-6 md:grid-cols-3">
-            {pricing.map((p) => (
-              <Card
-                key={p.name}
-                className={
-                  p.highlight
-                    ? "relative border-primary/60 shadow-xl shadow-primary/10"
-                    : "border-border"
-                }
-              >
-                {p.highlight && (
-                  <div className="absolute -top-3 left-1/2 -translate-x-1/2">
-                    <Badge>Most popular</Badge>
-                  </div>
-                )}
-                <CardContent className="p-6">
-                  <div className="mb-1 text-sm font-medium text-muted-foreground">
-                    {p.name}
-                  </div>
-                  <div className="mb-1">
-                    <span className="text-3xl font-bold">{p.price}</span>
-                    <span className="text-muted-foreground">{p.period}</span>
-                  </div>
-                  <p className="mb-6 text-sm text-muted-foreground">{p.desc}</p>
-                  <ul className="mb-6 space-y-2 text-sm">
-                    {p.features.map((feat) => (
-                      <li key={feat} className="flex items-start gap-2">
-                        <CheckCircle2 className="mt-0.5 h-4 w-4 shrink-0 text-primary" />
-                        <span>{feat}</span>
-                      </li>
-                    ))}
-                  </ul>
-                  <Link href="/signup">
-                    <Button
-                      className="w-full"
-                      variant={p.highlight ? "default" : "outline"}
-                    >
-                      {p.cta}
-                    </Button>
-                  </Link>
-                </CardContent>
-              </Card>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* FAQ */}
-      <section id="faq" className="border-t border-border py-20">
-        <div className="mx-auto max-w-3xl px-6">
-          <div className="mb-12 text-center">
-            <Badge variant="muted" className="mb-3">FAQ</Badge>
-            <h2 className="text-3xl font-bold tracking-tight md:text-4xl">
-              Frequently asked questions
-            </h2>
-          </div>
-          <FAQ />
-        </div>
-      </section>
-
       {/* CTA */}
       <section className="relative overflow-hidden border-t border-border py-20">
         <div
@@ -426,7 +326,7 @@ export default function LandingPage() {
           className="pointer-events-none absolute inset-0 -z-10 bg-[radial-gradient(ellipse_at_center,_var(--accent)_0%,_transparent_70%)] opacity-80"
         />
         <div className="mx-auto max-w-3xl px-6 text-center">
-          <h2 className="text-3xl font-bold tracking-tight md:text-4xl">
+          <h2 className="font-display text-3xl font-bold tracking-tight md:text-4xl">
             Stop losing leads to slow replies
           </h2>
           <p className="mt-4 text-muted-foreground">
@@ -438,65 +338,64 @@ export default function LandingPage() {
                 <Clock className="h-4 w-4" /> Start free trial
               </Button>
             </Link>
-            <Link href="/login">
+            <Link href="/pricing">
               <Button size="lg" variant="outline">
-                Sign in
+                See pricing
               </Button>
             </Link>
           </div>
         </div>
       </section>
 
-      {/* Footer */}
-      <footer className="border-t border-border py-8">
-        <div className="mx-auto flex max-w-6xl flex-col items-center justify-between gap-4 px-6 text-sm text-muted-foreground sm:flex-row">
-          <div className="flex items-center gap-2">
-            <MessageCircle className="h-4 w-4" />
-            <span>© {new Date().getFullYear()} WhatsappAutomate</span>
-          </div>
-          <div className="flex gap-4">
-            <Link href="/privacy" className="hover:text-foreground transition-colors">Privacy</Link>
-            <Link href="/terms" className="hover:text-foreground transition-colors">Terms</Link>
-            <Link href="/contact" className="hover:text-foreground transition-colors">Contact</Link>
-          </div>
-        </div>
-      </footer>
+      <SiteFooter />
     </div>
   );
 }
 
-function IndustryCard({
-  icon: Icon,
-  tag,
-  tagVariant,
-  title,
-  points,
+/**
+ * Decorative floating chat-bubble for the hero background.
+ * Three sizes; subtle drop-shadow + slow float animation.
+ */
+function FloatingBubble({
+  className = "",
+  delay = 0,
+  variant = "default",
 }: {
-  icon: React.ComponentType<{ className?: string }>;
-  tag: string;
-  tagVariant: "default" | "info" | "success";
-  title: string;
-  points: string[];
+  className?: string;
+  delay?: number;
+  variant?: "default" | "alt" | "small";
 }) {
+  const size =
+    variant === "small" ? "h-10 w-10" : variant === "alt" ? "h-14 w-14" : "h-12 w-12";
+  const tone =
+    variant === "alt"
+      ? "from-emerald-300/50 to-emerald-500/30"
+      : "from-emerald-400/60 to-emerald-600/40";
   return (
-    <Card className="group relative overflow-hidden border-border transition-all hover:-translate-y-1 hover:border-primary/40 hover:shadow-lg">
-      <CardContent className="p-6">
-        <div className="mb-4 flex items-center justify-between">
-          <div className="inline-flex h-10 w-10 items-center justify-center rounded-lg bg-accent text-accent-foreground">
-            <Icon className="h-5 w-5" />
-          </div>
-          <Badge variant={tagVariant}>{tag}</Badge>
-        </div>
-        <h3 className="mb-4 text-lg font-semibold">{title}</h3>
-        <ul className="space-y-2 text-sm">
-          {points.map((p) => (
-            <li key={p} className="flex items-start gap-2">
-              <CheckCircle2 className="mt-0.5 h-4 w-4 shrink-0 text-primary" />
-              <span>{p}</span>
-            </li>
-          ))}
-        </ul>
-      </CardContent>
-    </Card>
+    <div
+      aria-hidden
+      className={`absolute -z-10 ${size} ${className} animate-pulse`}
+      style={{ animationDelay: `${delay}s`, animationDuration: "5s" }}
+    >
+      <div
+        className={`flex h-full w-full items-center justify-center rounded-2xl border border-primary/30 bg-linear-to-br ${tone} shadow-lg shadow-primary/10 backdrop-blur-sm`}
+      >
+        <svg
+          viewBox="0 0 24 24"
+          fill="none"
+          className="h-5 w-5 text-white/90"
+          aria-hidden
+        >
+          <path
+            d="M21 11.5a8.38 8.38 0 0 1-3.8 7L18 22l-4.3-2.1A9 9 0 1 1 21 11.5Z"
+            stroke="currentColor"
+            strokeWidth="1.8"
+            strokeLinejoin="round"
+            fill="currentColor"
+            fillOpacity="0.15"
+          />
+        </svg>
+      </div>
+    </div>
   );
 }

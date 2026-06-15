@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
-import Link from "next/link";
 import { Mail, MapPin, MessageCircle, Phone } from "lucide-react";
+import { SiteNav } from "@/components/landing/site-nav";
+import { SiteFooter } from "@/components/landing/site-footer";
 
 export const metadata: Metadata = {
   title: "Contact — WhatsappAutomate",
@@ -9,32 +10,17 @@ export const metadata: Metadata = {
 };
 
 const COMPANY_NAME = "WhatsappAutomate";
-const CONTACT_EMAIL = "hiveofsolutionspro@gmail.com";
-const SUPPORT_EMAIL = "hiveofsolutionspro@gmail.com";
-const BUSINESS_ADDRESS = "Karachi, Pakistan";
+const CONTACT_EMAIL = "muaz.developments@gmail.com";
+const SUPPORT_EMAIL = "muaz.developments@gmail.com";
+const BUSINESS_ADDRESS = "Lahore, Pakistan";
 
 export default function ContactPage() {
   return (
     <div className="min-h-dvh">
-      <header className="sticky top-0 z-50 border-b border-border bg-background/80 backdrop-blur">
-        <div className="mx-auto flex h-16 max-w-3xl items-center justify-between px-6">
-          <Link href="/" className="flex items-center gap-2">
-            <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-primary text-primary-foreground">
-              <MessageCircle className="h-4 w-4" />
-            </div>
-            <span className="text-base font-semibold">WhatsappAutomate</span>
-          </Link>
-          <Link
-            href="/"
-            className="text-sm text-muted-foreground hover:text-foreground transition-colors"
-          >
-            Back to home
-          </Link>
-        </div>
-      </header>
+      <SiteNav />
 
       <main className="mx-auto max-w-3xl px-6 py-16">
-        <h1 className="text-4xl font-bold tracking-tight">Contact us</h1>
+        <h1 className="font-display text-4xl font-bold tracking-tight">Contact us</h1>
         <p className="mt-4 text-lg text-muted-foreground">
           We&apos;d love to hear from you. Reach out for sales, support, or
           partnership inquiries — we typically respond within one business day.
@@ -106,22 +92,7 @@ export default function ContactPage() {
         </div>
       </main>
 
-      <footer className="border-t border-border py-8">
-        <div className="mx-auto flex max-w-3xl flex-col items-center justify-between gap-4 px-6 text-sm text-muted-foreground sm:flex-row">
-          <div className="flex items-center gap-2">
-            <MessageCircle className="h-4 w-4" />
-            <span>© {new Date().getFullYear()} {COMPANY_NAME}</span>
-          </div>
-          <div className="flex gap-4">
-            <Link href="/privacy" className="hover:text-foreground transition-colors">
-              Privacy
-            </Link>
-            <Link href="/terms" className="hover:text-foreground transition-colors">
-              Terms
-            </Link>
-          </div>
-        </div>
-      </footer>
+      <SiteFooter />
     </div>
   );
 }

@@ -2,13 +2,13 @@ import {
   Flame,
   LayoutDashboard,
   MessagesSquare,
-  MessageCircle,
   Settings,
   Users,
   Database,
   UserPlus,
   TrendingUp,
 } from "lucide-react";
+import { LogoMark } from "@/components/logo";
 
 /**
  * Static, decorative mockup of the dashboard for the landing page.
@@ -36,12 +36,12 @@ export function DashboardPreview() {
         <div className="grid grid-cols-12">
           {/* Sidebar */}
           <aside className="col-span-3 hidden border-r border-border bg-card p-3 md:block">
-            <div className="mb-4 flex items-center gap-2 px-2 py-2">
-              <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-primary text-primary-foreground">
-                <MessageCircle className="h-4 w-4" />
-              </div>
+            <div className="mb-4 flex items-center gap-2.5 px-2 py-2">
+              <LogoMark size="sm" />
               <div className="text-xs">
-                <div className="font-semibold">WhatsappAutomate</div>
+                <div className="font-display font-semibold">
+                  Whatsapp<span className="text-primary">Automate</span>
+                </div>
                 <div className="text-muted-foreground">Prime Properties</div>
               </div>
             </div>

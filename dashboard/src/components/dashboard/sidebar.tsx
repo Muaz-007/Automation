@@ -7,7 +7,6 @@ import {
   Users,
   MessagesSquare,
   Settings,
-  MessageCircle,
   LogOut,
   Database,
   Sparkles,
@@ -16,6 +15,7 @@ import {
 import { cn, initials } from "@/lib/utils";
 import { signOut } from "@/app/actions/auth";
 import { useMobileNav } from "@/components/dashboard/mobile-nav";
+import { LogoMark } from "@/components/logo";
 
 const nav = [
   { href: "/dashboard", label: "Overview", icon: LayoutDashboard },
@@ -41,15 +41,13 @@ function SidebarBody({
 
   return (
     <div className="flex h-full flex-col">
-      <div className="flex h-16 items-center gap-2 border-b border-border px-6">
-        <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-primary text-primary-foreground">
-          <MessageCircle className="h-4 w-4" />
-        </div>
+      <div className="flex h-16 items-center gap-3 border-b border-border px-6">
+        <LogoMark size="sm" />
         <div className="flex flex-col min-w-0 flex-1">
-          <span className="text-sm font-semibold leading-none">
-            WhatsappAutomate
+          <span className="font-display text-sm font-semibold leading-none">
+            Whatsapp<span className="text-primary">Automate</span>
           </span>
-          <span className="truncate text-xs text-muted-foreground">
+          <span className="truncate text-xs text-muted-foreground mt-1">
             {businessName}
           </span>
         </div>

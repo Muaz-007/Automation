@@ -9,7 +9,7 @@ export const metadata: Metadata = {
 };
 
 const COMPANY_NAME = "WhatsappAutomate";
-const CONTACT_EMAIL = "hiveofsolutionspro@gmail.com";
+const CONTACT_EMAIL = "muaz.developments@gmail.com";
 
 export default function PrivacyPage() {
   return (
