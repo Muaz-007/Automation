@@ -1,4 +1,5 @@
 import "server-only";
+import { Prisma } from "@prisma/client";
 import { prisma } from "@/lib/prisma";
 import {
   buildSystemPrompt,
@@ -157,14 +158,14 @@ export async function processInboundMessage(
     orderBy: { created_at: "desc" },
   });
 
-  const merged = {
+  const merged: Prisma.InputJsonValue = {
     ...((existing?.extracted_data as Record<string, unknown> | null) ?? {}),
     ...Object.fromEntries(
       Object.entries(result.extracted_data).filter(
         ([, v]) => v !== undefined && v !== null && v !== "",
       ),
     ),
-  };
+  } as Prisma.InputJsonValue;
 
   const status = reconcileStatus(existing?.status, result.lead_status);
   const now = new Date();
