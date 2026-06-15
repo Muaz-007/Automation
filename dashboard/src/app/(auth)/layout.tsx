@@ -27,8 +27,8 @@ export default function AuthLayout({
         <div className="relative flex h-full items-center justify-center p-12">
           <div className="max-w-md">
             <blockquote className="text-2xl font-medium text-accent-foreground">
-              &ldquo;Pehle din 23 leads automatically captured ho gayi. Ek mahine
-              mein hamari sales 40% badh gayi hai.&rdquo;
+              &ldquo;23 leads were captured automatically on day one. Our sales
+              grew 40% in the first month.&rdquo;
             </blockquote>
             <div className="mt-6 flex items-center gap-3">
               <div className="flex h-10 w-10 items-center justify-center rounded-full bg-primary text-primary-foreground font-semibold">

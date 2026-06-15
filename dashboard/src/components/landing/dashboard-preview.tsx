@@ -75,7 +75,7 @@ export function DashboardPreview() {
             {/* Heading */}
             <div className="mb-5">
               <div className="text-sm font-semibold">Welcome back, Prime Properties</div>
-              <div className="text-xs text-muted-foreground">Aapke business ka aaj ka snapshot</div>
+              <div className="text-xs text-muted-foreground">Today&apos;s snapshot of your business</div>
             </div>
 
             {/* Stats */}

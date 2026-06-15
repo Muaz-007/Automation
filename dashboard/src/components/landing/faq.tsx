@@ -7,27 +7,27 @@ import { cn } from "@/lib/utils";
 const faqs = [
   {
     q: "Do I need a WhatsApp Business account to use this?",
-    a: "Yes. You'll connect your existing WhatsApp Business number through the Meta Cloud API — we walk you through it during onboarding. Setup takes ~10 minutes.",
+    a: "Yes. You'll connect your existing WhatsApp Business number through the Meta Cloud API — we walk you through it during onboarding. Setup takes about 10 minutes.",
   },
   {
     q: "Will the AI reply in Urdu / Roman Urdu?",
-    a: "Haan. AI automatically detects the customer's language and replies in the same one — English, Urdu, Roman Urdu, ya mixed.",
+    a: "Yes. The AI automatically detects the customer's language and replies in the same one — English, Urdu, Roman Urdu, or mixed.",
   },
   {
     q: "Can I take over a conversation from the AI?",
-    a: "Bilkul. Dashboard mein lead detail page se aap khud manually reply kar sakte hain. AI pause ho jata hai jab aap takeover karte hain.",
+    a: "Absolutely. From the lead detail page in your dashboard you can reply manually at any time. The AI pauses when you take over.",
   },
   {
-    q: "Kya integrations available hain (Shopify, Zoho, etc.)?",
-    a: "Built-in integrations Shopify and Zoho for the Growth plan and above. Custom integrations available on Pro and Enterprise.",
+    q: "Which integrations are available (Shopify, Zoho, etc.)?",
+    a: "Built-in integrations with Shopify and Zoho are available on the Growth plan and above. Custom integrations are available on Pro and Enterprise.",
   },
   {
-    q: "Kitne din mein setup ho jata hai?",
-    a: "Most clients are live within 24 hours. WhatsApp Business API verification se Meta side se 1–2 din lag sakte hain.",
+    q: "How long does setup take?",
+    a: "Most clients are live within 24 hours. WhatsApp Business API verification on Meta's side can take 1–2 days.",
   },
   {
     q: "Can I cancel anytime?",
-    a: "Yes. No long-term contracts. Cancel monthly subscription anytime from Settings.",
+    a: "Yes. No long-term contracts. Cancel your monthly subscription anytime from the Settings page.",
   },
 ];
 

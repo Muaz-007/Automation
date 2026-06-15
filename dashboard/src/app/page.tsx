@@ -24,32 +24,32 @@ const features = [
   {
     icon: MessageCircle,
     title: "24/7 AI Conversations",
-    desc: "Har WhatsApp message ka turant jawab — chahe raat ke 3 baje ho ya weekend.",
+    desc: "Instant replies to every WhatsApp message — even at 3am or on weekends.",
   },
   {
     icon: Sparkles,
     title: "Industry-Specific AI",
-    desc: "Real Estate, E-commerce, Clinic — har vertical ke liye specialized agent.",
+    desc: "Specialized agents for Real Estate, E-commerce, and Clinics — pre-trained for your vertical.",
   },
   {
     icon: LayoutDashboard,
     title: "Lead Dashboard",
-    desc: "Sari leads ek jagah — hot, warm, cold filter karein, team mein assign karein.",
+    desc: "All leads in one place. Filter by hot, warm, or cold; assign to team members; track status.",
   },
   {
     icon: ShieldCheck,
     title: "Multi-Tenant Secure",
-    desc: "Aapka data sirf aapka. Row-level security aur encrypted credentials.",
+    desc: "Your data stays yours. Row-level security and encrypted credentials end-to-end.",
   },
   {
     icon: Zap,
     title: "n8n-Powered Workflows",
-    desc: "n8n automation engine — fast, reliable, infinitely customizable.",
+    desc: "Built on the n8n automation engine — fast, reliable, infinitely customizable.",
   },
   {
     icon: Bot,
     title: "Document-Trained AI",
-    desc: "Website ya PDF upload karein — AI khud knowledge base bana lega.",
+    desc: "Upload your website or PDFs — the AI builds a knowledge base of your business automatically.",
   },
 ];
 
@@ -101,21 +101,21 @@ const pricing = [
 const testimonials = [
   {
     quote:
-      "Pehle din 23 leads automatically captured ho gayi. Ek mahine mein hamari sales 40% badh gayi hai.",
+      "23 leads were captured automatically on day one. Our sales grew 40% in the first month.",
     name: "Ali Hassan",
     role: "Prime Properties, Karachi",
     initials: "AH",
   },
   {
     quote:
-      "Hum 200+ Instagram inquiries daily handle karte the manually. Ab AI 80% messages handle kar leta hai — humein sirf orders ship karne hain.",
+      "We used to handle 200+ Instagram inquiries every day manually. Now AI handles 80% — we just ship orders.",
     name: "Maryam Tariq",
     role: "Saaya Closet (Online Boutique)",
     initials: "MT",
   },
   {
     quote:
-      "Clinic mein receptionist appointment booking nahi karwa pa rahi thi after-hours. AI ne 60% extra bookings dilayi pehle hi mahine.",
+      "Our receptionist couldn't take appointments after hours. The AI booked 60% more bookings in the very first month.",
     name: "Dr. Sara Iqbal",
     role: "Glow Aesthetic Clinic, Lahore",
     initials: "SI",
@@ -168,7 +168,7 @@ export default function LandingPage() {
               <Sparkles className="h-3 w-3" /> AI for WhatsApp Business
             </Badge>
             <h1 className="text-balance text-4xl font-bold tracking-tight md:text-6xl">
-              Har WhatsApp lead capture karo —{" "}
+              Capture every WhatsApp lead —{" "}
               <span className="bg-gradient-to-r from-primary to-emerald-500 bg-clip-text text-transparent">
                 automatically
               </span>

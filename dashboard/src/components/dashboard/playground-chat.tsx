@@ -19,9 +19,9 @@ type Msg = {
 const TEST_PHONE = "+10000000001"; // synthetic — never collides with real WhatsApp numbers
 
 const SAMPLE_PROMPTS = [
-  "Assalam o alaikum, DHA mein 3 bed house chahiye, budget 1.5 crore around",
-  "Hi! Do you have black hoodie size M in stock?",
-  "Mujhe Saturday ko skin consultation chahiye, kya available hai?",
+  "Hi, I'm looking for a 3 bedroom house in DHA Phase 6, budget around 1.5 crore.",
+  "Hi! Do you have the black hoodie in size M in stock?",
+  "I'd like to book a skin consultation for Saturday — what slots are available?",
 ];
 
 export function PlaygroundChat({

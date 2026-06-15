@@ -32,8 +32,8 @@ export default function InventoryPage() {
             </div>
             <h3 className="mb-1 text-lg font-semibold">No inventory yet</h3>
             <p className="mb-6 max-w-sm text-sm text-muted-foreground">
-              Apke properties / products yahan aayenge. Aap CSV upload kar sakte
-              hain ya manually add kar sakte hain.
+              Your properties, products, or services will appear here. Upload a
+              CSV or add items manually.
             </p>
             <div className="flex gap-2">
               <Button variant="outline" size="sm">

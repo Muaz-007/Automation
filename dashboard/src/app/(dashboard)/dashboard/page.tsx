@@ -144,7 +144,7 @@ export default async function DashboardPage() {
               Welcome back, {tu.tenant.business_name} 👋
             </h2>
             <p className="text-sm text-muted-foreground">
-              Aapke business ka aaj ka snapshot
+              Today&apos;s snapshot of your business
             </p>
           </div>
           <ClearDemoButton />
