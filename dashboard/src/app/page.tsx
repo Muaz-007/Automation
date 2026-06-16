@@ -73,15 +73,15 @@ const testimonials = [
     quote:
       "We used to handle 200+ Instagram inquiries every day manually. Now AI handles 80% — we just ship orders.",
     name: "Maryam Tariq",
-    role: "Saaya Closet (Online Boutique)",
+    role: "Saaya Closet, Lahore",
     initials: "MT",
   },
   {
     quote:
       "Our receptionist couldn't take appointments after hours. The AI booked 60% more bookings in the very first month.",
-    name: "Dr. Sara Iqbal",
-    role: "Glow Aesthetic Clinic, Lahore",
-    initials: "SI",
+    name: "Dr. Layla Mansoor",
+    role: "Glow Aesthetic Clinic, Dubai",
+    initials: "LM",
   },
 ];
 

@@ -17,8 +17,9 @@ export const metadata: Metadata = {
 const tiers = [
   {
     name: "Starter",
-    price: "₨ 4,999",
+    price: "$19",
     period: "/month",
+    localPrice: "≈ ₨ 4,999 PKR",
     desc: "Solo agents and small online stores getting started",
     features: [
       "1 WhatsApp number",
@@ -37,8 +38,9 @@ const tiers = [
   },
   {
     name: "Growth",
-    price: "₨ 12,999",
+    price: "$49",
     period: "/month",
+    localPrice: "≈ ₨ 12,999 PKR",
     desc: "Most popular — for SMBs scaling their sales",
     features: [
       "2 WhatsApp numbers",
@@ -56,8 +58,9 @@ const tiers = [
   },
   {
     name: "Pro",
-    price: "₨ 24,999",
+    price: "$99",
     period: "/month",
+    localPrice: "≈ ₨ 24,999 PKR",
     desc: "Scaling businesses with complex workflows",
     features: [
       "5 WhatsApp numbers",
@@ -138,6 +141,9 @@ export default function PricingPage() {
                     <span className="font-display text-4xl font-bold">{t.price}</span>
                     <span className="text-muted-foreground">{t.period}</span>
                   </div>
+                  <div className="mb-3 text-xs text-muted-foreground">
+                    {t.localPrice}
+                  </div>
                   <p className="mb-7 text-sm text-muted-foreground">{t.desc}</p>
                   <ul className="mb-6 flex-1 space-y-2.5 text-sm">
                     {t.features.map((feat) => (
@@ -172,6 +178,11 @@ export default function PricingPage() {
           <p className="mt-8 text-center text-sm text-muted-foreground">
             All plans: 14-day free trial. No credit card required. WhatsApp
             messaging fees billed by Meta directly to your account.
+            <br />
+            <span className="text-xs">
+              Prices in USD. Pakistani businesses can be billed in PKR — local
+              equivalent shown below each plan.
+            </span>
           </p>
         </div>
       </section>

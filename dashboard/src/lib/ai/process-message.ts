@@ -6,6 +6,7 @@ import {
   generateReply,
   type ConversationTurn,
 } from "@/lib/ai";
+import { fireN8nEvent, type N8nEventType } from "@/lib/n8n";
 
 const HISTORY_LIMIT = 20;
 
@@ -16,10 +17,15 @@ const HISTORY_LIMIT = 20;
 function reconcileStatus(
   current: string | undefined,
   aiStatus: "new" | "qualifying" | "warm" | "hot" | "cold",
+  hotScore: number,
+  hotThreshold: number,
 ): "new" | "qualifying" | "warm" | "hot" | "cold" | "won" | "lost" {
   if (current === "won" || current === "lost") {
     return current as "won" | "lost";
   }
+  // The tenant-configured hot threshold overrides the AI's status guess —
+  // any score >= threshold is hot, regardless of what the AI labeled it.
+  if (hotScore >= hotThreshold) return "hot";
   return aiStatus;
 }
 
@@ -39,7 +45,7 @@ type ProcessResult =
  * 1. Find or create the customer for this tenant
  * 2. Append the inbound message to conversation history
  * 3. Build the cached system prompt
- * 4. Call Claude with last N messages
+ * 4. Call Gemini with last N messages
  * 5. Save the AI reply
  * 6. Upsert the lead with extracted data + score
  * 7. Return the reply text (caller is responsible for sending it via WhatsApp)
@@ -99,7 +105,7 @@ export async function processInboundMessage(
       name: true,
       external_id: true,
       category: true,
-      price_pkr: true,
+      price: true,
       status: true,
       description: true,
       data: true,
@@ -114,9 +120,16 @@ export async function processInboundMessage(
     aiPersonaName: tenant.ai_persona_name ?? "Assistant",
     aiTone: tenant.ai_tone,
     language: tenant.language,
+    currency: tenant.currency,
+    timezone: tenant.timezone,
     customSystemPrompt: tenant.system_prompt,
     customerName: customer.name,
     customerCity: customer.city,
+    businessDescription: tenant.business_description,
+    businessWebsite: tenant.business_website,
+    greetingMessage: tenant.greeting_message,
+    responseLength: tenant.response_length,
+    useEmojis: tenant.use_emojis,
     inventory: inventoryItems.map((i) => ({
       ...i,
       data:
@@ -144,7 +157,7 @@ export async function processInboundMessage(
       content: m.message,
     }));
 
-  // 4. Call Claude
+  // 4. Call Gemini
   let result;
   try {
     result = await generateReply({
@@ -153,7 +166,7 @@ export async function processInboundMessage(
       newMessage: args.inboundText,
     });
   } catch (e) {
-    console.error("[ai] Claude call failed:", e);
+    console.error("[ai] Gemini call failed:", e);
     return {
       ok: false,
       error: e instanceof Error ? e.message : String(e),
@@ -190,7 +203,12 @@ export async function processInboundMessage(
     ),
   } as Prisma.InputJsonValue;
 
-  const status = reconcileStatus(existing?.status, result.lead_status);
+  const status = reconcileStatus(
+    existing?.status,
+    result.lead_status,
+    Math.max(existing?.hot_score ?? 0, result.hot_score),
+    tenant.hot_lead_threshold,
+  );
   const now = new Date();
 
   let lead;
@@ -231,6 +249,61 @@ export async function processInboundMessage(
       data: { city: result.extracted_data.city },
     });
   }
+
+  // 7. Fire events to n8n (best-effort, never blocks reply on failure)
+  const baseEvent = {
+    tenant_id: tenant.id,
+    lead_id: lead.id,
+    customer_id: customer.id,
+    customer: {
+      phone: customer.phone,
+      name: customer.name,
+      city: customer.city,
+    },
+    lead: {
+      status: lead.status,
+      hot_score: lead.hot_score,
+      source: lead.source,
+      extracted_data: merged as Record<string, unknown>,
+    },
+  };
+
+  // Only fire events the tenant has opted into. Code is the source of truth —
+  // the n8n filter node is now redundant for these but harmless.
+  const eventsToFire: N8nEventType[] = [];
+  if (!existing && tenant.notify_on_created) {
+    eventsToFire.push("lead.created");
+  }
+  if (
+    existing?.status !== "hot" &&
+    status === "hot" &&
+    tenant.notify_on_hot
+  ) {
+    eventsToFire.push("lead.hot");
+  }
+  if (
+    existing?.status !== "won" &&
+    status === "won" &&
+    tenant.notify_on_won
+  ) {
+    eventsToFire.push("lead.won");
+  }
+  if (result.handoff_to_human && tenant.notify_on_handoff) {
+    eventsToFire.push("lead.handoff");
+  }
+
+  await Promise.all(
+    eventsToFire.map((type) =>
+      fireN8nEvent({
+        ...baseEvent,
+        type,
+        last_message: args.inboundText,
+        handoff_reason: result.handoff_to_human
+          ? "AI marked handoff_to_human=true"
+          : undefined,
+      }),
+    ),
+  );
 
   return {
     ok: true,

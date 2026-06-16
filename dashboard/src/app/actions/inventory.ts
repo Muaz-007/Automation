@@ -17,9 +17,11 @@ const KNOWN_TOP_LEVEL_KEYS = new Set([
   "name",
   "title",
   "service",
+  "product",
   "category",
-  "price_pkr",
   "price",
+  "price_pkr", // legacy column name — still accepted for backward compat in CSV uploads
+  "price_usd",
   "status",
   "description",
 ]);
@@ -41,9 +43,15 @@ function mapRowToItem(row: Record<string, string>) {
   const externalId =
     row.id?.trim() || row.sku?.trim() || row.external_id?.trim() || null;
 
-  const priceRaw = row.price_pkr?.trim() || row.price?.trim() || "";
-  const price = priceRaw ? parseInt(priceRaw.replace(/[^0-9]/g, ""), 10) : null;
-  const price_pkr = price && !Number.isNaN(price) ? price : null;
+  const priceRaw =
+    row.price?.trim() ||
+    row.price_usd?.trim() ||
+    row.price_pkr?.trim() ||
+    "";
+  const parsedPrice = priceRaw
+    ? parseInt(priceRaw.replace(/[^0-9]/g, ""), 10)
+    : null;
+  const price = parsedPrice && !Number.isNaN(parsedPrice) ? parsedPrice : null;
 
   // Everything else (variants, colors, bedrooms, duration_minutes, etc.) → data
   const data: Record<string, string | number | boolean> = {};
@@ -63,7 +71,7 @@ function mapRowToItem(row: Record<string, string>) {
     external_id: externalId,
     name,
     category: row.category?.trim() || null,
-    price_pkr,
+    price,
     status: row.status?.trim() || null,
     description: row.description?.trim() || null,
     data,
@@ -84,8 +92,10 @@ export async function addInventoryItem(
     return { ok: false, error: "Name is required." };
   }
 
-  const priceRaw = String(formData.get("price_pkr") ?? "").trim();
-  const price = priceRaw ? parseInt(priceRaw.replace(/[^0-9]/g, ""), 10) : null;
+  const priceRaw = String(formData.get("price") ?? "").trim();
+  const parsedPrice = priceRaw
+    ? parseInt(priceRaw.replace(/[^0-9]/g, ""), 10)
+    : null;
 
   await prisma.inventoryItem.create({
     data: {
@@ -93,7 +103,7 @@ export async function addInventoryItem(
       external_id: String(formData.get("external_id") ?? "").trim() || null,
       name,
       category: String(formData.get("category") ?? "").trim() || null,
-      price_pkr: price && !Number.isNaN(price) ? price : null,
+      price: parsedPrice && !Number.isNaN(parsedPrice) ? parsedPrice : null,
       status: String(formData.get("status") ?? "").trim() || null,
       description: String(formData.get("description") ?? "").trim() || null,
     },

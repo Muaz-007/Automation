@@ -2,18 +2,18 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import {
   ArrowLeft,
-  CalendarPlus,
   Mail,
+  MessageSquare,
   Phone,
-  Tag,
+  StickyNote,
   UserCheck,
 } from "lucide-react";
 import { Topbar } from "@/components/dashboard/topbar";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
-import { StatusBadge } from "@/components/dashboard/status-badge";
 import { ChatThread } from "@/components/dashboard/chat-thread";
+import { LeadStatusEditor } from "@/components/dashboard/lead-status-editor";
+import { LeadNotesEditor } from "@/components/dashboard/lead-notes-editor";
 import { prisma } from "@/lib/prisma";
 import { requireTenant } from "@/lib/dal";
 import { formatRelativeTime, initials } from "@/lib/utils";
@@ -64,11 +64,11 @@ export default async function LeadDetailPage({
                   <div className="flex h-14 w-14 items-center justify-center rounded-full bg-accent text-lg font-semibold text-accent-foreground">
                     {initials(lead.customer.name ?? "?")}
                   </div>
-                  <div>
-                    <h3 className="text-lg font-semibold">
+                  <div className="min-w-0 flex-1">
+                    <h3 className="truncate text-lg font-semibold">
                       {lead.customer.name ?? lead.customer.phone}
                     </h3>
-                    <div className="text-sm text-muted-foreground">
+                    <div className="truncate text-sm text-muted-foreground">
                       {lead.customer.city ?? "—"}
                     </div>
                   </div>
@@ -86,32 +86,35 @@ export default async function LeadDetailPage({
                     label="Created"
                     value={formatRelativeTime(lead.created_at)}
                   />
-                </div>
-
-                <div className="mt-6 flex gap-2">
-                  <Button size="sm" className="flex-1">
-                    <CalendarPlus className="h-4 w-4" /> Schedule
-                  </Button>
-                  <Button size="sm" variant="outline" className="flex-1">
-                    <Tag className="h-4 w-4" /> Tag
-                  </Button>
+                  {lead.last_message_at && (
+                    <Row
+                      icon={MessageSquare}
+                      label="Last message"
+                      value={formatRelativeTime(lead.last_message_at)}
+                    />
+                  )}
                 </div>
               </CardContent>
             </Card>
 
             <Card>
               <CardHeader>
-                <CardTitle className="text-base">Status</CardTitle>
+                <CardTitle className="text-base">Status &amp; score</CardTitle>
               </CardHeader>
               <CardContent className="space-y-4">
-                <div className="flex items-center justify-between">
+                <div className="space-y-2">
                   <span className="text-sm text-muted-foreground">Stage</span>
-                  <StatusBadge status={lead.status} />
+                  <LeadStatusEditor
+                    leadId={lead.id}
+                    currentStatus={lead.status}
+                  />
                 </div>
                 <div>
                   <div className="mb-1 flex items-center justify-between text-sm">
                     <span className="text-muted-foreground">Hot score</span>
-                    <span className="font-semibold">{lead.hot_score}/100</span>
+                    <span className="font-semibold tabular-nums">
+                      {lead.hot_score}/100
+                    </span>
                   </div>
                   <div className="h-2 w-full overflow-hidden rounded-full bg-muted">
                     <div
@@ -119,8 +122,8 @@ export default async function LeadDetailPage({
                         lead.hot_score > 70
                           ? "bg-red-500"
                           : lead.hot_score > 40
-                          ? "bg-amber-500"
-                          : "bg-zinc-400"
+                            ? "bg-amber-500"
+                            : "bg-zinc-400"
                       }`}
                       style={{ width: `${lead.hot_score}%` }}
                     />
@@ -131,12 +134,27 @@ export default async function LeadDetailPage({
 
             <Card>
               <CardHeader>
-                <CardTitle className="text-base">Extracted data</CardTitle>
+                <CardTitle className="flex items-center gap-2 text-base">
+                  <StickyNote className="h-4 w-4" /> Private notes
+                </CardTitle>
+              </CardHeader>
+              <CardContent>
+                <LeadNotesEditor
+                  leadId={lead.id}
+                  initialNotes={lead.notes}
+                />
+              </CardContent>
+            </Card>
+
+            <Card>
+              <CardHeader>
+                <CardTitle className="text-base">Extracted by AI</CardTitle>
               </CardHeader>
               <CardContent>
                 {Object.keys(extracted).length === 0 ? (
                   <p className="text-sm text-muted-foreground">
-                    Nothing extracted yet.
+                    Nothing extracted yet — AI will populate this as the
+                    conversation unfolds.
                   </p>
                 ) : (
                   <dl className="space-y-2 text-sm">
@@ -148,7 +166,9 @@ export default async function LeadDetailPage({
                         <dt className="capitalize text-muted-foreground">
                           {k.replace(/_/g, " ")}
                         </dt>
-                        <dd className="font-medium text-right">{String(v)}</dd>
+                        <dd className="text-right font-medium">
+                          {String(v)}
+                        </dd>
                       </div>
                     ))}
                   </dl>
@@ -168,15 +188,24 @@ export default async function LeadDetailPage({
               </Badge>
             </div>
 
-            <ChatThread messages={messages} />
-
-            <div className="flex items-center gap-2 rounded-xl border border-border bg-card p-2 shadow-sm">
-              <input
-                className="flex-1 rounded-md bg-transparent px-3 py-2 text-sm placeholder:text-muted-foreground focus:outline-none"
-                placeholder="Take over and reply manually…"
-              />
-              <Button size="sm">Send</Button>
-            </div>
+            {messages.length === 0 ? (
+              <Card>
+                <CardContent className="flex flex-col items-center justify-center px-6 py-16 text-center">
+                  <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-full bg-accent text-accent-foreground">
+                    <MessageSquare className="h-5 w-5" />
+                  </div>
+                  <h4 className="mb-1 text-base font-semibold">
+                    No messages yet
+                  </h4>
+                  <p className="max-w-sm text-sm text-muted-foreground">
+                    Conversations appear here once the customer messages your
+                    WhatsApp number.
+                  </p>
+                </CardContent>
+              </Card>
+            ) : (
+              <ChatThread messages={messages} />
+            )}
           </div>
         </div>
       </div>

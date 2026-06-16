@@ -40,6 +40,7 @@ export default async function NewInventoryItemPage() {
   const tu = await requireTenant();
   const hint =
     industryHints[tu.tenant.industry] ?? industryHints.real_estate;
+  const currency = tu.tenant.currency;
 
   return (
     <>
@@ -95,10 +96,10 @@ export default async function NewInventoryItemPage() {
 
               <div className="grid gap-5 sm:grid-cols-2">
                 <div className="space-y-2">
-                  <Label htmlFor="price_pkr">Price (PKR)</Label>
+                  <Label htmlFor="price">Price ({currency})</Label>
                   <Input
-                    id="price_pkr"
-                    name="price_pkr"
+                    id="price"
+                    name="price"
                     type="number"
                     min="0"
                     placeholder="2499"

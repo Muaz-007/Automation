@@ -48,7 +48,7 @@ export function SiteFooter() {
               </div>
             </div>
             <p className="mt-4 max-w-xs text-sm leading-relaxed text-muted-foreground">
-              An AI WhatsApp assistant for SMBs in Pakistan. Capture every lead,
+              An AI WhatsApp assistant for SMBs worldwide. Capture every lead,
               24/7.
             </p>
           </div>
@@ -80,7 +80,7 @@ export function SiteFooter() {
         {/* Bottom bar */}
         <div className="mt-8 flex flex-col items-center justify-between gap-2 border-t border-border pt-6 text-center text-xs text-muted-foreground sm:flex-row sm:text-left md:mt-10">
           <span>© {new Date().getFullYear()} WhatsappAutomate. All rights reserved.</span>
-          <span>Built in Lahore, Pakistan</span>
+          <span>Built in Lahore — serving SMBs worldwide</span>
         </div>
       </div>
     </footer>

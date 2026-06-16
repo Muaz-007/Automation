@@ -163,9 +163,12 @@ export default function TermsPage() {
       <H2>13. Governing law and disputes</H2>
       <P>
         These Terms are governed by the laws of the Islamic Republic of
-        Pakistan. Any dispute will be resolved in the courts of Lahore,
-        Pakistan, unless local consumer-protection law gives you a
-        non-waivable right to a different forum.
+        Pakistan, the jurisdiction in which the Service is operated. Any
+        dispute will be resolved in the courts of Lahore, Pakistan, unless
+        the local consumer-protection law of your country gives you a
+        non-waivable right to a different forum. International customers
+        agree that this jurisdiction applies to commercial disputes, while
+        retaining all rights granted under their local consumer law.
       </P>
 
       <H2>14. Changes to the Terms</H2>

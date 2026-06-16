@@ -117,7 +117,7 @@ export async function POST(
           });
         }
 
-        // Process via Claude + save + update lead
+        // Process via Gemini + save + update lead
         const result = await processInboundMessage({
           tenantId: tenant.id,
           customerPhone: `+${message.from}`,

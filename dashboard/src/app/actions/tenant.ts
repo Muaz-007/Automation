@@ -5,15 +5,40 @@ import { prisma } from "@/lib/prisma";
 import { requireTenant } from "@/lib/dal";
 
 type TenantUpdate = {
+  // Business identity
   business_name?: string;
   industry?: "real_estate" | "ecommerce" | "healthcare";
+  business_description?: string | null;
+  business_website?: string | null;
+  business_email?: string | null;
+
+  // AI behavior
   ai_persona_name?: string;
   ai_tone?: "formal" | "friendly" | "casual";
   language?: "english" | "urdu" | "roman_urdu" | "mixed";
+  greeting_message?: string | null;
+  response_length?: string;
+  use_emojis?: boolean;
   system_prompt?: string | null;
+
+  // Localization
+  currency?: string;
+  timezone?: string;
+
+  // WhatsApp
   phone_number?: string | null;
   phone_number_id?: string | null;
   whatsapp_token?: string | null;
+
+  // Lead scoring
+  hot_lead_threshold?: number;
+
+  // Notifications
+  notification_email?: string | null;
+  notify_on_created?: boolean;
+  notify_on_hot?: boolean;
+  notify_on_handoff?: boolean;
+  notify_on_won?: boolean;
 };
 
 const NULLABLE: Array<keyof TenantUpdate> = [
@@ -21,29 +46,73 @@ const NULLABLE: Array<keyof TenantUpdate> = [
   "phone_number",
   "phone_number_id",
   "whatsapp_token",
+  "business_description",
+  "business_website",
+  "business_email",
+  "greeting_message",
+  "notification_email",
+];
+
+const BOOLEAN_FIELDS: Array<keyof TenantUpdate> = [
+  "use_emojis",
+  "notify_on_created",
+  "notify_on_hot",
+  "notify_on_handoff",
+  "notify_on_won",
+];
+
+const INT_FIELDS: Array<keyof TenantUpdate> = ["hot_lead_threshold"];
+
+const STRING_FIELDS: Array<keyof TenantUpdate> = [
+  "business_name",
+  "industry",
+  "ai_persona_name",
+  "ai_tone",
+  "language",
+  "response_length",
+  "currency",
+  "timezone",
+  "business_description",
+  "business_website",
+  "business_email",
+  "greeting_message",
+  "system_prompt",
+  "phone_number",
+  "phone_number_id",
+  "whatsapp_token",
+  "notification_email",
 ];
 
 export async function updateTenant(formData: FormData) {
   const tu = await requireTenant();
-  const data: TenantUpdate = {};
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const data: any = {};
 
-  const fields: (keyof TenantUpdate)[] = [
-    "business_name",
-    "industry",
-    "ai_persona_name",
-    "ai_tone",
-    "language",
-    "system_prompt",
-    "phone_number",
-    "phone_number_id",
-    "whatsapp_token",
-  ];
-  for (const f of fields) {
+  for (const f of STRING_FIELDS) {
     const v = formData.get(f);
     if (typeof v === "string") {
       const trimmed = v.trim();
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      (data as any)[f] = trimmed === "" && NULLABLE.includes(f) ? null : trimmed;
+      data[f] = trimmed === "" && NULLABLE.includes(f) ? null : trimmed;
+    }
+  }
+
+  for (const f of BOOLEAN_FIELDS) {
+    // Checkboxes that aren't checked don't appear in formData at all,
+    // so a present-and-non-empty value means TRUE.
+    if (formData.has(f)) {
+      const v = formData.get(f);
+      data[f] = v === "on" || v === "true" || v === "1";
+    } else if (formData.has(`__${f}__present`)) {
+      // Hidden marker indicating the form rendered this checkbox — treat as false
+      data[f] = false;
+    }
+  }
+
+  for (const f of INT_FIELDS) {
+    const v = formData.get(f);
+    if (typeof v === "string" && v.trim() !== "") {
+      const n = parseInt(v.trim(), 10);
+      if (!Number.isNaN(n)) data[f] = n;
     }
   }
 
@@ -191,7 +260,7 @@ export async function seedDemoData() {
         tenant_id: tenantId,
         customer_id: ahmedId,
         role: "user",
-        message: "Assalam o alaikum, DHA mein house chahiye",
+        message: "Hi, I'm looking for a house in DHA.",
         created_at: hours(2),
       },
       {
@@ -199,14 +268,14 @@ export async function seedDemoData() {
         customer_id: ahmedId,
         role: "assistant",
         message:
-          "Walaikum salam Ahmed! DHA mein kis phase mein dekh rahe hain, aur budget kya hai?",
+          "Hi Ahmed! Which phase in DHA are you looking at, and what's your budget?",
         created_at: hours(2),
       },
       {
         tenant_id: tenantId,
         customer_id: ahmedId,
         role: "user",
-        message: "Phase 6 ya 7, 3 bedroom. Budget around 1.5 crore",
+        message: "Phase 6 or 7, 3 bedroom. Budget around 1.5 crore.",
         created_at: hours(1),
       },
       {
@@ -214,14 +283,14 @@ export async function seedDemoData() {
         customer_id: ahmedId,
         role: "assistant",
         message:
-          "Bohat acha! 3 properties available hain Phase 6 mein. Kya is week site visit ke liye time nikal sakte hain?",
+          "Great! I have 3 properties available in Phase 6. Can you make time for a site visit this week?",
         created_at: hours(1),
       },
       {
         tenant_id: tenantId,
         customer_id: ahmedId,
         role: "user",
-        message: "Haan, Saturday ko free hun. Sham ko 4 baje?",
+        message: "Yes, I'm free on Saturday. How about 4 PM?",
         created_at: minutes(10),
       },
       {
@@ -229,7 +298,7 @@ export async function seedDemoData() {
         customer_id: ahmedId,
         role: "assistant",
         message:
-          "Done! Saturday 4 PM ka site visit confirm. Aapko 30 min pehle reminder bhej dunga.",
+          "Done! Saturday 4 PM site visit confirmed. I'll send you a reminder 30 min before.",
         created_at: minutes(8),
       },
     ],
@@ -243,7 +312,7 @@ export async function seedDemoData() {
         tenant_id: tenantId,
         customer_id: fatimaId,
         role: "user",
-        message: "Bahria Town mein 2 bed apartment rent par chahiye",
+        message: "Looking for a 2-bed apartment to rent in Bahria Town.",
         created_at: hours(5),
       },
       {
@@ -251,14 +320,14 @@ export async function seedDemoData() {
         customer_id: fatimaId,
         role: "assistant",
         message:
-          "Bahria Town mein 2 bed apartments available hain. Budget range kya hai aur kab tak shift karna hai?",
+          "We have 2-bed apartments available in Bahria Town. What's your budget range, and when do you need to move in?",
         created_at: hours(5),
       },
       {
         tenant_id: tenantId,
         customer_id: fatimaId,
         role: "user",
-        message: "70 to 80 hazaar tak. Next month",
+        message: "Around 70 to 80 thousand. Next month.",
         created_at: hours(1),
       },
     ],

@@ -1,0 +1,45 @@
+# Local n8n setup for WhatsappAutomate
+#
+# Start:  docker compose up -d
+# Stop:   docker compose down
+# Logs:   docker compose logs -f n8n
+#
+# First-time setup: open http://localhost:5678 → create owner account.
+# Workflows + credentials persist in the `n8n_data` Docker volume.
+
+services:
+  n8n:
+    image: n8nio/n8n:latest
+    container_name: whatsapp-automate-n8n
+    restart: unless-stopped
+    ports:
+      - "5678:5678"
+    environment:
+      # Where n8n thinks it's hosted (used to build webhook URLs shown in the UI).
+      # For local dev keep localhost. For VPS deploy, replace with your public URL.
+      - N8N_HOST=localhost
+      - N8N_PORT=5678
+      - N8N_PROTOCOL=http
+      - WEBHOOK_URL=http://localhost:5678/
+
+      - GENERIC_TIMEZONE=Asia/Karachi
+      - TZ=Asia/Karachi
+
+      # Required by newer n8n versions to encrypt credentials at rest.
+      # IMPORTANT: change this to your own random string before going to prod.
+      - N8N_ENCRYPTION_KEY=local-dev-only-change-me-in-production
+
+      # Send anonymous usage info to n8n.io (opt-in; off here)
+      - N8N_DIAGNOSTICS_ENABLED=false
+
+      # Suppress task-runner setup warning seen on first start
+      - N8N_RUNNERS_ENABLED=true
+
+      # Allow workflows to use built-in node modules during code nodes
+      - NODE_FUNCTION_ALLOW_BUILTIN=*
+    volumes:
+      - n8n_data:/home/node/.n8n
+
+volumes:
+  n8n_data:
+    name: whatsapp-automate-n8n-data

@@ -41,10 +41,10 @@ const industries = [
       "Multi-agent routing for agencies",
     ],
     sampleConvo: {
-      customer: "Salam, DHA Phase 6 mein 3 bed house chahiye, budget 1.5 crore",
-      ai: "Walaikum salam! Budget aur area note kar liya. Site visit ke liye kaunsa din suit karega — Saturday ya Sunday?",
+      customer: "Hi, I'm looking for a 3-bedroom house in DHA Phase 6, budget around 1.5 crore.",
+      ai: "Hi! Got it — budget and area noted. Which day works better for a site visit, Saturday or Sunday?",
     },
-    pricing: "Rs. 7,999/mo (Solo Agent) — Rs. 19,999/mo (Agency)",
+    pricing: "$29/mo (Solo Agent) — $79/mo (Agency)",
   },
   {
     icon: ShoppingBag,
@@ -67,9 +67,9 @@ const industries = [
     ],
     sampleConvo: {
       customer: "Hi, do you have black hoodie size M in stock?",
-      ai: "Yes, black hoodie size M is available — Rs. 2,499. Want to place an order? I'll just need your address and preferred payment method.",
+      ai: "Yes, black hoodie size M is available — $25. Want to place an order? I'll just need your address and preferred payment method.",
     },
-    pricing: "Rs. 4,999/mo (Starter) — Rs. 12,999/mo (Growth)",
+    pricing: "$19/mo (Starter) — $49/mo (Growth)",
   },
   {
     icon: Stethoscope,
@@ -91,10 +91,10 @@ const industries = [
       "Multi-doctor / multi-branch routing",
     ],
     sampleConvo: {
-      customer: "Saturday ko skin consultation ke liye time available hai?",
-      ai: "Saturday ke 3 slots open hain: 11 AM, 2 PM, aur 4:30 PM. Aapko kaunsa preferred hai?",
+      customer: "Is there an appointment available for a skin consultation on Saturday?",
+      ai: "Saturday has 3 open slots: 11 AM, 2 PM, and 4:30 PM. Which one do you prefer?",
     },
-    pricing: "Rs. 6,999/mo (Solo Doctor) — Rs. 14,999/mo (Multi-Doctor)",
+    pricing: "$25/mo (Solo Doctor) — $59/mo (Multi-Doctor)",
   },
 ];
 

@@ -84,7 +84,7 @@ export default function ContactPage() {
           <h2 className="font-semibold">About {COMPANY_NAME}</h2>
           <p className="mt-2 text-sm text-muted-foreground">
             {COMPANY_NAME} is a WhatsApp automation platform that helps small
-            and medium businesses in Pakistan capture and qualify leads 24/7
+            and medium businesses worldwide capture and qualify leads 24/7
             using AI. We integrate directly with the official Meta WhatsApp
             Cloud API and serve real estate, e-commerce, and healthcare
             verticals.

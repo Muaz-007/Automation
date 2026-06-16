@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Geist, Bricolage_Grotesque, Instrument_Serif } from "next/font/google";
+import Script from "next/script";
 import "./globals.css";
 import { ThemeProvider } from "@/components/theme-provider";
 import { ToasterProvider } from "@/components/toaster";
@@ -49,13 +50,15 @@ export default function RootLayout({
       className={`${geistSans.variable} ${bricolage.variable} ${instrumentSerif.variable}`}
       suppressHydrationWarning
     >
-      <head>
-        <script dangerouslySetInnerHTML={{ __html: themeBootstrap }} />
-      </head>
       <body
         className="min-h-dvh bg-background text-foreground antialiased"
         suppressHydrationWarning
       >
+        <Script
+          id="theme-bootstrap"
+          strategy="beforeInteractive"
+          dangerouslySetInnerHTML={{ __html: themeBootstrap }}
+        />
         <ThemeProvider>
           <ToasterProvider>{children}</ToasterProvider>
         </ThemeProvider>

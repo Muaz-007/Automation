@@ -162,7 +162,7 @@ export function PlaygroundChat({
           <div>
             <h3 className="font-semibold">About the playground</h3>
             <p className="mt-1 text-sm text-muted-foreground">
-              Every message you send here runs through the full pipeline: Claude, the lead extractor, and the database. The only thing skipped is the actual WhatsApp send.
+              Every message you send here runs through the full pipeline: Gemini, the lead extractor, and the database. The only thing skipped is the actual WhatsApp send.
             </p>
           </div>
 

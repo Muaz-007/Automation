@@ -19,7 +19,7 @@ import { SiteFooter } from "@/components/landing/site-footer";
 export const metadata: Metadata = {
   title: "Who We Are — WhatsappAutomate",
   description:
-    "WhatsappAutomate is built in Lahore, for Pakistani SMBs. Learn about our mission to bring enterprise-grade AI to every WhatsApp Business in the country.",
+    "WhatsappAutomate is built in Lahore for SMBs worldwide. Learn about our mission to bring enterprise-grade AI to every WhatsApp Business on the planet.",
 };
 
 const values = [
@@ -35,8 +35,8 @@ const values = [
   },
   {
     icon: MapPin,
-    title: "Built for Pakistan",
-    desc: "Roman Urdu, Urdu, English, mixed — we understand how Pakistani customers actually talk on WhatsApp. Local context is a feature, not an afterthought.",
+    title: "Speaks your customers' language",
+    desc: "English, Urdu, Roman Urdu, Arabic, Spanish, Hindi, mixed — Gemini handles natural code-switching the way your customers actually talk. Local context is a feature, not an afterthought.",
   },
   {
     icon: Heart,
@@ -59,7 +59,7 @@ export default function AboutPage() {
         <div className="mx-auto max-w-4xl px-6 py-20 text-center md:py-28">
           <Badge variant="muted" className="mb-4">Who we are</Badge>
           <h1 className="font-display text-balance text-4xl font-bold tracking-tight md:text-5xl">
-            We&apos;re here so no Pakistani business{" "}
+            We&apos;re here so no small business{" "}
             <em className="font-serif text-primary not-italic">
               <span className="italic">ever misses a lead</span>
             </em>{" "}
@@ -67,8 +67,8 @@ export default function AboutPage() {
           </h1>
           <p className="mx-auto mt-6 max-w-2xl text-lg leading-relaxed text-muted-foreground">
             WhatsappAutomate is an AI assistant for small and medium businesses
-            in Pakistan that live and die by WhatsApp. We built it in Lahore,
-            for the businesses we grew up around.
+            around the world that live and die by WhatsApp. Built in Lahore,
+            serving SMBs from Karachi to Dubai to São Paulo.
           </p>
         </div>
       </section>
@@ -84,11 +84,12 @@ export default function AboutPage() {
           </h2>
           <div className="mt-8 space-y-6 text-base leading-relaxed text-foreground/85">
             <p>
-              Across Pakistan, WhatsApp is the silent backbone of small
+              Across emerging markets — Pakistan, India, the Gulf, Southeast
+              Asia, Latin America — WhatsApp is the silent backbone of small
               business. A property broker in DHA. A clothing seller in Anarkali.
-              A skin clinic in Gulberg. Every one of them runs their entire
-              sales pipeline through WhatsApp messages — often on their
-              personal phone, often alone.
+              A skin clinic in Dubai. A boutique in São Paulo. Every one of
+              them runs their entire sales pipeline through WhatsApp messages —
+              often on their personal phone, often alone.
             </p>
             <p>
               And every one of them loses sales the same way: a message comes
@@ -99,9 +100,9 @@ export default function AboutPage() {
             <p>
               We saw this happen to friends and family running real businesses.
               Enterprise solutions exist — but they&apos;re built for Fortune
-              500 companies, priced in dollars, and require IT teams nobody has.
-              SMBs were left with no real option except hiring more people, or
-              losing leads.
+              500 companies, priced in dollars at enterprise rates, and require
+              IT teams nobody has. SMBs were left with no real option except
+              hiring more people, or losing leads.
             </p>
             <p className="font-medium text-foreground">
               So we built WhatsappAutomate — enterprise-grade AI for WhatsApp,
@@ -218,9 +219,10 @@ export default function AboutPage() {
                   </div>
                   <p className="text-sm leading-relaxed text-muted-foreground">
                     Building WhatsappAutomate to solve a problem I saw up close:
-                    Pakistani SMBs losing real money because they can&apos;t
-                    answer WhatsApp messages fast enough. Background in software
-                    engineering, based in Lahore.
+                    SMBs losing real money because they can&apos;t answer
+                    WhatsApp messages fast enough. Background in software
+                    engineering, based in Lahore — building for businesses
+                    everywhere.
                   </p>
                 </div>
               </div>

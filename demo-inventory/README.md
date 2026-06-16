@@ -1,20 +1,24 @@
 # Demo Inventory Sheets
 
-Sample inventory data for each of the three target industries. Customers can:
+Sample inventory data for the three target industries. Customers can:
 
 - **Reference** these files to see the expected column structure
 - **Upload** them directly to the Inventory page as starter data
 - **Edit** the columns to match their own catalog before uploading
 
-All sample data is set in a Pakistani business context (DHA, Bahria Town, Lahore clinics, etc.) to feel realistic for our target market.
+Most samples are set in a Pakistani business context (DHA, Bahria Town,
+Lahore clinics, etc.). One USD/international demo is included for
+international tenants. Prices are integers in your tenant's currency —
+set it under Settings → Business currency.
 
 ## Files
 
-| File | Industry | Purpose |
-|---|---|---|
-| `real-estate.csv` | Real Estate | Property listings — houses, apartments, plots for sale and rent |
-| `ecommerce.csv` | E-commerce | Product catalog — clothing, accessories, electronics with sizes and stock |
-| `healthcare.csv` | Healthcare | Service offerings — consultations, treatments, packages with pricing |
+| File | Industry | Currency | Purpose |
+|---|---|---|---|
+| `real-estate.csv` | Real Estate | PKR | Property listings — houses, apartments, plots for sale and rent |
+| `ecommerce.csv` | E-commerce | PKR | Product catalog — clothing, accessories with sizes and stock |
+| `healthcare.csv` | Healthcare | PKR | Service offerings — consultations, treatments, packages |
+| `us-ecommerce.csv` | E-commerce | USD | International apparel store — prices in USD, sizes 8–XXL |
 
 ## Schema
 
@@ -61,7 +65,8 @@ All sample data is set in a Pakistani business context (DHA, Bahria Town, Lahore
 
 ## Notes
 
-- Prices are in PKR (Pakistani Rupees) as integers — no commas, no currency symbol
+- Use `price` as the column header (integer in your tenant's currency — no commas, no symbol)
+- The CSV uploader also accepts legacy `price_pkr` and `price_usd` headers as aliases — both are stored in the same `price` column on the server
 - Boolean fields use lowercase `true` / `false`
 - Enum fields use lowercase `snake_case`
 - Empty cells are allowed for optional fields

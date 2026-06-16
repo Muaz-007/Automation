@@ -1,8 +1,7 @@
 import Link from "next/link";
-import { ArrowDown, ArrowUp, ArrowUpDown, ChevronRight, Filter, Plus, Sparkles } from "lucide-react";
+import { ArrowDown, ArrowUp, ArrowUpDown, ChevronRight, Sparkles } from "lucide-react";
 import { Topbar } from "@/components/dashboard/topbar";
 import { Card } from "@/components/ui/card";
-import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { StatusBadge } from "@/components/dashboard/status-badge";
 import { SeedDemoButton } from "@/components/dashboard/demo-data-button";
@@ -160,16 +159,9 @@ export default async function LeadsPage({
           <div>
             <h2 className="font-display text-2xl font-bold tracking-tight">Leads</h2>
             <p className="text-sm text-muted-foreground">
-              {leads.length} {activeFilter === "all" ? "total" : activeFilter} leads
+              {leads.length} {activeFilter === "all" ? "total" : activeFilter}{" "}
+              {leads.length === 1 ? "lead" : "leads"}
             </p>
-          </div>
-          <div className="flex gap-2">
-            <Button variant="outline" size="sm">
-              <Filter className="h-4 w-4" /> More filters
-            </Button>
-            <Button size="sm">
-              <Plus className="h-4 w-4" /> Add lead
-            </Button>
           </div>
         </div>
 

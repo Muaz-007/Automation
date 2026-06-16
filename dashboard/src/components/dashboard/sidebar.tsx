@@ -160,8 +160,8 @@ export function Sidebar({
 
   return (
     <>
-      {/* Desktop sidebar */}
-      <aside className="hidden h-dvh w-60 shrink-0 border-r border-border bg-card md:block">
+      {/* Desktop sidebar — sticky to viewport so it doesn't scroll with page content */}
+      <aside className="sticky top-0 hidden h-dvh w-60 shrink-0 self-start border-r border-border bg-card md:block">
         <SidebarBody
           email={email}
           businessName={businessName}

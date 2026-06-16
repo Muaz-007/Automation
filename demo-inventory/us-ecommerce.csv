@@ -1,0 +1,16 @@
+sku,name,category,variants,colors,price,stock,status,description
+HD-BLK-M,Heavyweight Hoodie,Hoodies,"S,M,L,XL","Black,Charcoal,Navy",65,42,in_stock,400gsm fleece hoodie. Unisex fit. Embroidered logo.
+TS-PLN-M,Classic Cotton Tee,T-Shirts,"S,M,L,XL,XXL","White,Black,Grey,Olive",25,180,in_stock,Premium combed cotton crew-neck. Soft hand-feel. Machine washable.
+JK-DEN-32,Vintage Denim Jacket,Jackets,"S,M,L,XL","Indigo,Washed Black",95,18,in_stock,Selvedge denim. Button front. Two chest pockets. Pre-washed.
+PT-CHN-30,Slim-fit Chinos,Pants,"30,32,34,36","Khaki,Olive,Navy,Stone",55,67,in_stock,Stretch cotton twill. Tapered leg. Hidden zip pocket.
+SK-RUN-10,Trail Runner Sneakers,Footwear,"8,9,10,11,12","White,Black,Grey/Volt",120,24,in_stock,Mesh upper. EVA midsole. Reinforced toe. Lightweight everyday runner.
+BG-CAN-1,Canvas Tote Bag,Accessories,"One size","Natural,Black,Olive",18,210,in_stock,12oz cotton canvas. Reinforced handles. Interior pocket. 15L capacity.
+WT-LTR-1,Leather Bifold Wallet,Accessories,"One size","Brown,Black",45,80,in_stock,Full-grain leather. 6 card slots. RFID-blocking lining.
+CP-BSC-1,Embroidered Snapback Cap,Accessories,"One size","Black,Olive,Cream",22,150,in_stock,6-panel snapback. Curved brim. Adjustable strap. Embroidered logo.
+BX-NTL-M,Wool Crew Sweater,Sweaters,"S,M,L,XL","Charcoal,Forest,Burgundy",85,33,in_stock,80% merino wool blend. Ribbed hem and cuffs. Year-round weight.
+SC-BRW-1,Knit Beanie,Accessories,"One size","Black,Grey,Mustard",16,95,in_stock,Fine-knit acrylic. Cuffed fit. Stretchy and warm.
+SF-CRW-S,Crew Socks 3-pack,Accessories,"S/M,L/XL","White,Black,Grey Mix",14,420,in_stock,Combed cotton blend. Reinforced heel and toe. Mid-calf height.
+JK-PUF-L,Lightweight Puffer Jacket,Jackets,"S,M,L,XL","Black,Olive,Navy",135,12,low_stock,Synthetic fill. Water-resistant shell. Packs into its own pocket.
+TS-GRP-L,Graphic Pocket Tee,T-Shirts,"S,M,L,XL","White,Black,Sage",30,88,in_stock,Soft cotton jersey. Chest-pocket graphic. Standard fit.
+SHT-OXF-M,Oxford Button-down Shirt,Shirts,"S,M,L,XL","White,Light Blue,Pink",58,52,in_stock,100% cotton oxford. Button-down collar. Slim-relaxed fit.
+SK-LO-9,Low-top Canvas Sneakers,Footwear,"7,8,9,10,11","Off-White,Black,Olive",75,40,in_stock,Vulcanized rubber sole. Cotton canvas upper. Classic silhouette.

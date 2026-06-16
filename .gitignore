@@ -50,3 +50,7 @@ Thumbs.db
 
 # Claude Code project metadata (local only)
 .claude/
+
+# n8n local data (Docker volume handles persistence; nothing to commit)
+n8n/.n8n/
+n8n/data/

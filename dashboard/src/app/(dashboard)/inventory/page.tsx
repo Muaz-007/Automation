@@ -7,12 +7,7 @@ import { Badge } from "@/components/ui/badge";
 import { CsvUpload } from "@/components/dashboard/csv-upload";
 import { prisma } from "@/lib/prisma";
 import { requireTenant } from "@/lib/dal";
-import { formatRelativeTime } from "@/lib/utils";
-
-function formatPrice(pkr: number | null) {
-  if (pkr === null) return "—";
-  return `Rs. ${pkr.toLocaleString("en-PK")}`;
-}
+import { formatRelativeTime, formatCurrency } from "@/lib/utils";
 
 export default async function InventoryPage({
   searchParams,
@@ -24,6 +19,7 @@ export default async function InventoryPage({
 
   const tu = await requireTenant();
   const tenantId = tu.tenant_id;
+  const currency = tu.tenant.currency;
 
   const items = await prisma.inventoryItem.findMany({
     where: { tenant_id: tenantId },
@@ -154,7 +150,9 @@ export default async function InventoryPage({
                         {item.category ?? "—"}
                       </td>
                       <td className="px-4 py-3.5 font-medium tabular-nums">
-                        {formatPrice(item.price_pkr)}
+                        {item.price === null
+                          ? "—"
+                          : formatCurrency(item.price, currency)}
                       </td>
                       <td className="px-4 py-3.5">
                         {item.status ? (

@@ -46,7 +46,7 @@ export default async function PlaygroundPage() {
               <Badge variant="info">Test mode</Badge>
             </div>
             <p className="text-sm text-muted-foreground">
-              Test your AI conversation without setting up WhatsApp. Powered by Claude Haiku 4.5.
+              Test your AI conversation without setting up WhatsApp. Powered by Gemini Flash.
             </p>
           </div>
         </div>

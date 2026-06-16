@@ -18,12 +18,32 @@ export function formatRelativeTime(date: Date | string) {
   return d.toLocaleDateString();
 }
 
-export function formatCurrency(amount: number, currency = "PKR") {
-  return new Intl.NumberFormat("en-PK", {
-    style: "currency",
-    currency,
-    maximumFractionDigits: 0,
-  }).format(amount);
+const CURRENCY_LOCALE: Record<string, string> = {
+  PKR: "en-PK",
+  INR: "en-IN",
+  AED: "en-AE",
+  SAR: "ar-SA",
+  GBP: "en-GB",
+  EUR: "en-IE",
+  USD: "en-US",
+};
+
+/**
+ * Format an integer amount in major units using the tenant's currency
+ * (e.g. 1999 + USD → "$1,999", 1999 + PKR → "₨1,999").
+ */
+export function formatCurrency(amount: number, currency = "USD") {
+  const locale = CURRENCY_LOCALE[currency] ?? "en-US";
+  try {
+    return new Intl.NumberFormat(locale, {
+      style: "currency",
+      currency,
+      maximumFractionDigits: 0,
+    }).format(amount);
+  } catch {
+    // Unknown ISO code — fall back to plain number with code suffix
+    return `${amount.toLocaleString("en-US")} ${currency}`;
+  }
 }
 
 export function initials(name: string) {
