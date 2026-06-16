@@ -80,16 +80,18 @@ function mapRowToItem(row: Record<string, string>) {
 
 /**
  * Add a single inventory item from the manual form.
+ * Used directly as <form action={addInventoryItem}>, so the signature is the
+ * native server-action shape (one FormData arg, void return). It redirects
+ * on success — no client state needed for the happy path.
  */
-export async function addInventoryItem(
-  _prev: ActionResult | undefined,
-  formData: FormData,
-): Promise<ActionResult> {
+export async function addInventoryItem(formData: FormData): Promise<void> {
   const tu = await requireTenant();
 
   const name = String(formData.get("name") ?? "").trim();
   if (!name) {
-    return { ok: false, error: "Name is required." };
+    // The form has the `required` attr on the Name input, so this shouldn't
+    // happen via the UI. Throw so Next.js renders the error boundary.
+    throw new Error("Name is required.");
   }
 
   const priceRaw = String(formData.get("price") ?? "").trim();
