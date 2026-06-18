@@ -17,7 +17,7 @@ import { SiteNav } from "@/components/landing/site-nav";
 import { SiteFooter } from "@/components/landing/site-footer";
 
 export const metadata: Metadata = {
-  title: "Features — WhatsappAutomate",
+  title: "Features — Talkential",
   description:
     "Discover the AI-powered features that turn WhatsApp into your most productive sales channel — 24/7 conversations, lead scoring, industry templates, document-trained AI, and more.",
 };

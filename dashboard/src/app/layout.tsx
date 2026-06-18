@@ -26,9 +26,9 @@ const instrumentSerif = Instrument_Serif({
 });
 
 export const metadata: Metadata = {
-  title: "WhatsappAutomate — AI WhatsApp Assistant for SMBs",
+  title: "Talkential — Where every talk has potential",
   description:
-    "Never miss a WhatsApp lead. AI-powered 24/7 conversations, lead capture, and a clean dashboard for real estate, e-commerce, and clinics.",
+    "Where every talk has potential. AI-powered WhatsApp assistant that captures leads 24/7, qualifies them, and surfaces them in a clean dashboard for real estate, e-commerce, and clinics.",
 };
 
 const themeBootstrap = `

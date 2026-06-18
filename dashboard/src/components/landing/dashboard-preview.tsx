@@ -40,8 +40,8 @@ export function DashboardPreview() {
               <LogoMark size="sm" />
               <div className="text-xs">
                 <div className="font-display font-semibold">
-                  Whats<span className="text-primary">App</span>
-                  <span className="ml-1">Automate</span>
+                  <span className="text-primary">Talk</span>
+                  <span>ential</span>
                 </div>
                 <div className="text-muted-foreground">Prime Properties</div>
               </div>

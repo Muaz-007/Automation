@@ -17,9 +17,9 @@ import { SiteNav } from "@/components/landing/site-nav";
 import { SiteFooter } from "@/components/landing/site-footer";
 
 export const metadata: Metadata = {
-  title: "Who We Are — WhatsappAutomate",
+  title: "Who We Are — Talkential",
   description:
-    "WhatsappAutomate is built in Lahore for SMBs worldwide. Learn about our mission to bring enterprise-grade AI to every WhatsApp Business on the planet.",
+    "Talkential is built in Lahore for SMBs worldwide. Learn about our mission to bring enterprise-grade AI to every WhatsApp Business on the planet.",
 };
 
 const values = [
@@ -66,7 +66,7 @@ export default function AboutPage() {
             again
           </h1>
           <p className="mx-auto mt-6 max-w-2xl text-lg leading-relaxed text-muted-foreground">
-            WhatsappAutomate is an AI assistant for small and medium businesses
+            Talkential is an AI assistant for small and medium businesses
             around the world that live and die by WhatsApp. Built in Lahore,
             serving SMBs from Karachi to Dubai to São Paulo.
           </p>
@@ -105,7 +105,7 @@ export default function AboutPage() {
               hiring more people, or losing leads.
             </p>
             <p className="font-medium text-foreground">
-              So we built WhatsappAutomate — enterprise-grade AI for WhatsApp,
+              So we built Talkential — enterprise-grade AI for WhatsApp,
               priced and shaped for the businesses that actually need it most.
             </p>
           </div>
@@ -218,7 +218,7 @@ export default function AboutPage() {
                     Founder &amp; Builder
                   </div>
                   <p className="text-sm leading-relaxed text-muted-foreground">
-                    Building WhatsappAutomate to solve a problem I saw up close:
+                    Building Talkential to solve a problem I saw up close:
                     SMBs losing real money because they can&apos;t answer
                     WhatsApp messages fast enough. Background in software
                     engineering, based in Lahore — building for businesses

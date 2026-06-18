@@ -18,7 +18,7 @@ export default function LoginPage() {
     <div>
       <h1 className="text-2xl font-semibold tracking-tight">Welcome back</h1>
       <p className="mt-2 text-sm text-muted-foreground">
-        Sign in to your WhatsappAutomate dashboard
+        Sign in to your Talkential dashboard
       </p>
 
       <form action={action} className="mt-8 space-y-4">

@@ -9,9 +9,9 @@ import { SiteFooter } from "@/components/landing/site-footer";
 import { FAQ } from "@/components/landing/faq";
 
 export const metadata: Metadata = {
-  title: "Pricing — WhatsappAutomate",
+  title: "Pricing — Talkential",
   description:
-    "Simple, transparent pricing for WhatsappAutomate. Free 14-day trial. No credit card required. ROI in your first closed deal.",
+    "Simple, transparent pricing for Talkential. Free 14-day trial. No credit card required. ROI in your first closed deal.",
 };
 
 const tiers = [

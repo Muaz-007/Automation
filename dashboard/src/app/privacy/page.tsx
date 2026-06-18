@@ -3,12 +3,12 @@ import Link from "next/link";
 import { LegalLayout, H2, P, UL } from "@/components/landing/legal-layout";
 
 export const metadata: Metadata = {
-  title: "Privacy Policy — WhatsappAutomate",
+  title: "Privacy Policy — Talkential",
   description:
-    "How WhatsappAutomate collects, uses, and protects the data of businesses and their customers.",
+    "How Talkential collects, uses, and protects the data of businesses and their customers.",
 };
 
-const COMPANY_NAME = "WhatsappAutomate";
+const COMPANY_NAME = "Talkential";
 const CONTACT_EMAIL = "muaz.developments@gmail.com";
 
 export default function PrivacyPage() {

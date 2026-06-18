@@ -39,11 +39,11 @@ export function SiteFooter() {
               <LogoMark size="md" />
               <div>
                 <div className="font-display font-semibold leading-tight">
-                  Whats<span className="text-primary">App</span>
-                  <span className="ml-1">Automate</span>
+                  <span className="text-primary">Talk</span>
+                  <span>ential</span>
                 </div>
                 <div className="text-xs text-muted-foreground">
-                  AI for WhatsApp Business
+                  Where every talk has potential.
                 </div>
               </div>
             </div>
@@ -79,7 +79,7 @@ export function SiteFooter() {
 
         {/* Bottom bar */}
         <div className="mt-8 flex flex-col items-center justify-between gap-2 border-t border-border pt-6 text-center text-xs text-muted-foreground sm:flex-row sm:text-left md:mt-10">
-          <span>© {new Date().getFullYear()} WhatsappAutomate. All rights reserved.</span>
+          <span>© {new Date().getFullYear()} Talkential. All rights reserved.</span>
           <span>Built in Lahore — serving SMBs worldwide</span>
         </div>
       </div>

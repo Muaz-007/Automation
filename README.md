@@ -1,4 +1,4 @@
-# WhatsappAutomate
+# Talkential
 
 AI-powered WhatsApp assistant for SMBs — captures leads 24/7, qualifies them, and surfaces them in a clean dashboard. Built for **Real Estate**, **E-commerce**, and **Healthcare** verticals.
 

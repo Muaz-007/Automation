@@ -3,12 +3,12 @@ import Link from "next/link";
 import { LegalLayout, H2, P, UL } from "@/components/landing/legal-layout";
 
 export const metadata: Metadata = {
-  title: "Terms of Service — WhatsappAutomate",
+  title: "Terms of Service — Talkential",
   description:
-    "The agreement between WhatsappAutomate and the businesses that use our WhatsApp automation platform.",
+    "The agreement between Talkential and the businesses that use our WhatsApp automation platform.",
 };
 
-const COMPANY_NAME = "WhatsappAutomate";
+const COMPANY_NAME = "Talkential";
 const CONTACT_EMAIL = "muaz.developments@gmail.com";
 
 export default function TermsPage() {

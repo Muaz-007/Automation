@@ -134,8 +134,8 @@ export function Logo({
           hideClass,
         )}
       >
-        Whats<span className="text-primary">App</span>
-        <span className="ml-1 text-foreground/85">Automate</span>
+        <span className="text-primary">Talk</span>
+        <span className="text-foreground/85">ential</span>
       </span>
     </span>
   );

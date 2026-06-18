@@ -64,8 +64,8 @@ function SidebarBody({
         <LogoMark size="sm" />
         <div className="flex flex-col min-w-0 flex-1">
           <span className="font-display text-sm font-semibold leading-none">
-            Whats<span className="text-primary">App</span>
-            <span className="ml-1">Automate</span>
+            <span className="text-primary">Talk</span>
+            <span>ential</span>
           </span>
           <span className="truncate text-xs text-muted-foreground mt-1">
             {businessName}

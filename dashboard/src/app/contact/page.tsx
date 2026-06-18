@@ -4,12 +4,12 @@ import { SiteNav } from "@/components/landing/site-nav";
 import { SiteFooter } from "@/components/landing/site-footer";
 
 export const metadata: Metadata = {
-  title: "Contact — WhatsappAutomate",
+  title: "Contact — Talkential",
   description:
-    "Get in touch with the WhatsappAutomate team for sales, support, or partnership inquiries.",
+    "Get in touch with the Talkential team for sales, support, or partnership inquiries.",
 };
 
-const COMPANY_NAME = "WhatsappAutomate";
+const COMPANY_NAME = "Talkential";
 const CONTACT_EMAIL = "muaz.developments@gmail.com";
 const SUPPORT_EMAIL = "muaz.developments@gmail.com";
 const BUSINESS_ADDRESS = "Lahore, Pakistan";

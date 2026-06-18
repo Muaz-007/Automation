@@ -1,6 +1,6 @@
 # n8n workflow engine
 
-Local n8n instance for WhatsappAutomate automation flows — Slack/Telegram alerts, CRM sync, drip campaigns, scheduled reports.
+Local n8n instance for Talkential automation flows — Slack/Telegram alerts, CRM sync, drip campaigns, scheduled reports.
 
 ## Prerequisites
 
@@ -44,7 +44,7 @@ To completely reset n8n (lose all workflows):
 docker compose down -v
 ```
 
-## How WhatsappAutomate sends events to n8n
+## How Talkential sends events to n8n
 
 The Next.js dashboard fires HTTP POST requests to n8n's "Webhook" trigger nodes whenever something interesting happens — a new lead, a hot lead, a handoff request, etc.
 

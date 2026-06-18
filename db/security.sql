@@ -1,4 +1,4 @@
--- WhatsappAutomate — baseline Row Level Security policy
+-- Talkential — baseline Row Level Security policy
 --
 -- Why this exists:
 --   Supabase auto-exposes every `public` table via the PostgREST REST API.

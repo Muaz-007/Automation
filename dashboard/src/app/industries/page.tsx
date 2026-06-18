@@ -15,7 +15,7 @@ import { SiteNav } from "@/components/landing/site-nav";
 import { SiteFooter } from "@/components/landing/site-footer";
 
 export const metadata: Metadata = {
-  title: "Industries — WhatsappAutomate",
+  title: "Industries — Talkential",
   description:
     "Pre-trained AI templates for real estate, e-commerce, and healthcare — the three industries that lose the most sales to slow WhatsApp replies.",
 };

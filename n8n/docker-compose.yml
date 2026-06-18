@@ -1,4 +1,4 @@
-# Local n8n setup for WhatsappAutomate
+# Local n8n setup for Talkential
 #
 # Start:  docker compose up -d
 # Stop:   docker compose down

@@ -128,7 +128,7 @@ export default function LandingPage() {
         <div className="mx-auto max-w-6xl px-6 pt-12 md:pt-16 pb-12">
           <div className="mx-auto max-w-3xl text-center animate-in fade-in slide-in-from-bottom-4 duration-700">
             <Badge variant="success" className="mb-5">
-              <Sparkles className="h-3 w-3" /> AI for WhatsApp Business
+              <Sparkles className="h-3 w-3" /> Where every talk has potential
             </Badge>
             <h1 className="font-display text-balance text-4xl font-bold leading-[1.05] tracking-tight md:text-6xl">
               Capture every WhatsApp lead —{" "}

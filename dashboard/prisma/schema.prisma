@@ -1,4 +1,4 @@
-// WhatsappAutomate — multi-tenant Postgres schema (Prisma)
+// Talkential — multi-tenant Postgres schema (Prisma)
 // Mirrors db/schema.sql for use with Supabase.
 
 generator client {

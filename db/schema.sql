@@ -1,4 +1,4 @@
--- WhatsappAutomate — multi-tenant Postgres schema (Supabase compatible)
+-- Talkential — multi-tenant Postgres schema (Supabase compatible)
 -- Run this once in your Supabase SQL editor (or `psql -f schema.sql`).
 
 create extension if not exists "uuid-ossp";
