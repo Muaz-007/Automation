@@ -54,3 +54,5 @@ Thumbs.db
 # n8n local data (Docker volume handles persistence; nothing to commit)
 n8n/.n8n/
 n8n/data/
+
+.vercel
